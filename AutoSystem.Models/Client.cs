@@ -12,6 +12,7 @@ namespace AutoSystem.Models
             this.cars = new HashSet<Car>();
         }
 
+        //dffgggggsg test
         public int ClientId { get; set; }
 
         public string Name { get; set; }
