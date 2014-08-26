@@ -1,0 +1,5 @@
+C:\Users\ivopp_000\Desktop\Task\AutoSystem 1.0\AutoSystemServices\AutoSystem.Services\AutoSystem.Models\bin\Debug\AutoSystem.Models.dll
+C:\Users\ivopp_000\Desktop\Task\AutoSystem 1.0\AutoSystemServices\AutoSystem.Services\AutoSystem.Models\bin\Debug\AutoSystem.Models.pdb
+C:\Users\ivopp_000\Desktop\Task\AutoSystem 1.0\AutoSystemServices\AutoSystem.Services\AutoSystem.Models\obj\Debug\AutoSystem.Models.csprojResolveAssemblyReference.cache
+C:\Users\ivopp_000\Desktop\Task\AutoSystem 1.0\AutoSystemServices\AutoSystem.Services\AutoSystem.Models\obj\Debug\AutoSystem.Models.dll
+C:\Users\ivopp_000\Desktop\Task\AutoSystem 1.0\AutoSystemServices\AutoSystem.Services\AutoSystem.Models\obj\Debug\AutoSystem.Models.pdb
