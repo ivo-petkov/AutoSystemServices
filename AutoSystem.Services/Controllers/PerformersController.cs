@@ -121,7 +121,8 @@ namespace AutoSystem.Services.Controllers
                                     Username = value.Username,
                                     SessionKey = sessionKey,
                                     Name = value.Name,
-                                    Address = value.Address
+                                    Address = value.Address,
+                                    Telephone = value.Telephone
                                 };
 
             return Request.CreateResponse(HttpStatusCode.Created, performerModel);

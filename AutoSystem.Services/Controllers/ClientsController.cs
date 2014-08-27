@@ -1,15 +1,18 @@
 ﻿using AutoSystem.DataLayer;
-using AutoSystem.Models;
 using AutoSystem.Repositories;
-using AutoSystem.Services.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
-using System.Web;
+using System.Net.Http.Formatting;
+using System.Text;
 using System.Web.Http;
-using System.Web.Mvc;
+using System.Web.Http.ValueProviders;
+using AutoSystem.Models;
+using AutoSystem.Services.Models;
+using Forum.WebApi.Attributes;
+
 
 namespace AutoSystem.Services.Controllers
 {
@@ -25,7 +28,7 @@ namespace AutoSystem.Services.Controllers
 
         // api/clients/add
         [HttpPost]
-        [ActionName("add")]
+        [ActionName("include")]
         public HttpResponseMessage Add([FromBody]Client value)
         {
             //check for empty properties (not needed)

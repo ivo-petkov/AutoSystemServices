@@ -13,6 +13,7 @@ using AutoSystem.Models;
 using AutoSystem.Services.Models;
 using Forum.WebApi.Attributes;
 
+
 namespace AutoSystem.Services.Controllers
 {
     public class CarsController : ApiController
@@ -30,21 +31,14 @@ namespace AutoSystem.Services.Controllers
         [ActionName("add")]
         public HttpResponseMessage Register([FromBody]Car value)
         {
-            //check for empty properties
-            //if (string.IsNullOrEmpty(value.Username) || string.IsNullOrWhiteSpace(value.Username)
-            //    || value.Username.Length < 5 || value.Username.Length > 30)
-            //{
-            //    return Request.CreateResponse(HttpStatusCode.BadRequest,
-            //                                  "Invalid username. Should be between 5 and 30 characters");
-            //}
-
-
+            //check for empty properties (not needed)
+            
             //check for already registered car
-            //if (performersRepository.GetByUsername(value.Username) != null)
-            //{
-            //    return Request.CreateResponse(HttpStatusCode.BadRequest,
-            //                                  "Username already exists");
-            //}
+            if (carsRepository.GetByRegisterPlate(value.RegisterPlate) != null)
+            {
+                return Request.CreateResponse(HttpStatusCode.Accepted,
+                                              "Car already registered!");
+            }
 
             carsRepository.Add(value);
 

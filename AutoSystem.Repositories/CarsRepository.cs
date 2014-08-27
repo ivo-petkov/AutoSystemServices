@@ -1,6 +1,7 @@
 ﻿using AutoSystem.DataLayer;
 using AutoSystem.Models;
 using System;
+using System.Linq;
 
 
 namespace AutoSystem.Repositories
@@ -15,5 +16,9 @@ namespace AutoSystem.Repositories
             this.dbContext = context;
         }
 
+        public Car GetByRegisterPlate(string registerPlate)
+        {
+            return dbContext.Cars.FirstOrDefault(u => u.RegisterPlate == registerPlate);
+        }
     }
 }

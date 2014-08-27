@@ -1,18 +1,61 @@
-﻿using System;
+﻿using AutoSystem.DataLayer;
+using AutoSystem.Models;
+using AutoSystem.DataLayer;
+using AutoSystem.Repositories;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+using System.Net;
+using System.Net.Http;
+using System.Net.Http.Formatting;
+using System.Text;
+using System.Web.Http;
+using System.Web.Http.ValueProviders;
+using AutoSystem.Models;
+using AutoSystem.Services.Models;
+using Forum.WebApi.Attributes;
+
 
 namespace AutoSystem.Services.Controllers
 {
-    public class RepairsController : Controller
+    public class RepairsController : ApiController
     {
-        //
-        // GET: /Repairs/
-        public ActionResult Index()
+        private RepairsRepository repairsRepository;
+        private PerformersRepository performersRepository;
+
+        public RepairsController()
         {
-            return View();
+            var context = new AutoSystemContext();
+            this.repairsRepository = new RepairsRepository(context);
         }
+
+        // api/repairs/add
+        [HttpPost]
+        [ActionName("insert")]
+        public HttpResponseMessage Add([FromBody]Repair value,
+            [ValueProvider(typeof(HeaderValueProviderFactory<String>))] String sessionKey)
+        {
+            //check for empty properties (not needed)
+            
+            //check for already registered repair (not needed)
+
+            var performer = performersRepository.GetBySessionKey(sessionKey);
+            repairsRepository.Add(value);
+
+            var repairModel = new RepairModel()
+            {
+                RepairId = value.RepairId,
+                Date = value.Date,
+                Milage = value.Milage,
+                Price = value.Price,
+                Status = value.Status,
+                Performer = performer
+            };
+
+            return Request.CreateResponse(HttpStatusCode.Created, repairModel);
+        }
+
+
+
 	}
 }
