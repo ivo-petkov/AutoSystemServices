@@ -57,6 +57,8 @@ namespace AutoSystem.Services.Controllers
 
             repairsRepository.Add(repairToAdd);
 
+
+            /// very questionable
             var repairModel = new RepairModel()
             {
                 RepairId = value.RepairId,
@@ -70,6 +72,25 @@ namespace AutoSystem.Services.Controllers
 
 
             return Request.CreateResponse(HttpStatusCode.Created, repairModel);
+        }
+
+
+        // api/repairs/all
+        [HttpGet]
+        [ActionName("all")]
+        public HttpResponseMessage GetAllRepairs(
+            [ValueProvider(typeof(HeaderValueProviderFactory<String>))] String sessionKey)
+        {
+            Performer performer = performersRepository.GetBySessionKey(sessionKey);          
+
+            if (performer != null)
+            {
+                var repairs = performer.Repairs;
+
+                return Request.CreateResponse(HttpStatusCode.OK, repairs);
+            }
+
+            return Request.CreateResponse(HttpStatusCode.BadRequest, "Invalid session key");
         }
 
 
