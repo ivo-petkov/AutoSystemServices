@@ -162,6 +162,7 @@
     <Compile Include="Models\AttachmentModel.cs" />
     <Compile Include="Models\CarModel.cs" />
     <Compile Include="Models\ClientModel.cs" />
+    <Compile Include="Models\DummyRepairModel.cs" />
     <Compile Include="Models\EditPerformerModel.cs" />
     <Compile Include="Models\NoteModel.cs" />
     <Compile Include="Models\PerformerModel.cs" />

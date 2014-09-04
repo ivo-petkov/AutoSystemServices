@@ -81,16 +81,29 @@ namespace AutoSystem.Services.Controllers
         public HttpResponseMessage GetAllRepairs(
             [ValueProvider(typeof(HeaderValueProviderFactory<String>))] String sessionKey)
         {
-            Performer performer = performersRepository.GetBySessionKey(sessionKey);          
+            Performer performer = performersRepository.GetBySessionKey(sessionKey);
 
             if (performer != null)
             {
-                var repairs = performer.Repairs;
+                    var simpleRepairs = new List<SimpleRepairModel>();
+                    IEnumerable<Repair> repairs = performer.Repairs;
+                    foreach (var item in repairs)
+                    {
+                        var dummy = new SimpleRepairModel() { 
+                            RepairId= item.RepairId,
+                            Date = item.Date.ToString(),
+                            Status = item.Status
+                        };
+                        simpleRepairs.Add(dummy);
+                    }
 
                 return Request.CreateResponse(HttpStatusCode.OK, repairs);
             }
+            else
+            {
 
-            return Request.CreateResponse(HttpStatusCode.BadRequest, "Invalid session key");
+                return Request.CreateResponse(HttpStatusCode.BadRequest, "Invalid session key");
+            }
         }
 
 
