@@ -15,7 +15,6 @@ namespace AutoSystem.Services.Models
         public decimal Price { get; set; }
         public int PerformerId { get; set; }
         public int CarId { get; set; }
-        public Performer Performer { get; set; }
         public IEnumerable<NoteModel> Notes { get; set; }
         public IEnumerable<AttachmentModel> Attachments { get; set; }
     }

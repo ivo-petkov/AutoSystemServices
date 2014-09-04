@@ -22,11 +22,14 @@ namespace AutoSystem.Services.Controllers
     {
         private RepairsRepository repairsRepository;
         private PerformersRepository performersRepository;
+        private CarsRepository carsRepository;
 
         public RepairsController()
         {
             var context = new AutoSystemContext();
             this.repairsRepository = new RepairsRepository(context);
+            this.performersRepository = new PerformersRepository(context);
+            this.carsRepository = new CarsRepository(context);
         }
 
         // api/repairs/add
@@ -39,19 +42,32 @@ namespace AutoSystem.Services.Controllers
             
             //check for already registered repair (not needed)
 
-            var performer = performersRepository.GetBySessionKey(sessionKey);
-            repairsRepository.Add(value);
+            Performer performer = performersRepository.GetBySessionKey(sessionKey);
+            Car car = carsRepository.GetById(value.CarId);
+            Repair repairToAdd = new Repair()
+            {
+                Car = car,
+                Performer = performer,
+                Date = DateTime.Now,
+                Milage = value.Milage,
+                Price = value.Price,
+                Status = value.Status,
+
+            };
+
+            repairsRepository.Add(repairToAdd);
 
             var repairModel = new RepairModel()
             {
                 RepairId = value.RepairId,
-                Date = value.Date,
+                Date = DateTime.Now,
                 Milage = value.Milage,
                 Price = value.Price,
                 Status = value.Status,
-                CarId = value.CarId,
-                PerformerId = performer.PerformerId
+                PerformerId = performer.PerformerId,
+                CarId = car.CarId,
             };
+
 
             return Request.CreateResponse(HttpStatusCode.Created, repairModel);
         }

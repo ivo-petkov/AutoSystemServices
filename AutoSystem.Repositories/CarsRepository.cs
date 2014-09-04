@@ -20,5 +20,10 @@ namespace AutoSystem.Repositories
         {
             return dbContext.Cars.FirstOrDefault(u => u.RegisterPlate == registerPlate);
         }
+
+        public Car GetById(int id)
+        {
+            return dbContext.Cars.FirstOrDefault(u => u.CarId == id);
+        }
     }
 }
