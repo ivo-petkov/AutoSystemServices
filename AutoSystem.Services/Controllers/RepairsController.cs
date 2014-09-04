@@ -31,7 +31,7 @@ namespace AutoSystem.Services.Controllers
 
         // api/repairs/add
         [HttpPost]
-        [ActionName("insert")]
+        [ActionName("add")]
         public HttpResponseMessage Add([FromBody]Repair value,
             [ValueProvider(typeof(HeaderValueProviderFactory<String>))] String sessionKey)
         {
@@ -49,7 +49,8 @@ namespace AutoSystem.Services.Controllers
                 Milage = value.Milage,
                 Price = value.Price,
                 Status = value.Status,
-                Performer = performer
+                CarId = value.CarId,
+                PerformerId = performer.PerformerId
             };
 
             return Request.CreateResponse(HttpStatusCode.Created, repairModel);

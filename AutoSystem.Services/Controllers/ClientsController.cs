@@ -47,7 +47,7 @@ namespace AutoSystem.Services.Controllers
                 ClientId = value.ClientId,
                 Name = value.Name,
                 Address = value.Address,
-                Telephone = value.Address
+                Telephone = value.Telephone
             };
 
             clientsRepository.Add(client);
