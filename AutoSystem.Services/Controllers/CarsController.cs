@@ -53,7 +53,8 @@ namespace AutoSystem.Services.Controllers
                 Engine = value.Engine,
                 EngineSize = value.EngineSize,
                 Chassis = value.Chassis,
-                RegisterPlate = value.RegisterPlate
+                RegisterPlate = value.RegisterPlate,
+                ClientId = value.ClientId
             };
 
             return Request.CreateResponse(HttpStatusCode.Created, carModel);
