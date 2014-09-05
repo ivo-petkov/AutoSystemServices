@@ -125,6 +125,7 @@
     <Folder Include="Views\Attachments\" />
     <Folder Include="Views\Cars\" />
     <Folder Include="Views\Clients\" />
+    <Folder Include="Views\FdUp\" />
     <Folder Include="Views\Notes\" />
     <Folder Include="Views\Repairs\" />
   </ItemGroup>
@@ -152,6 +153,7 @@
     <Compile Include="Controllers\AttachmentsController.cs" />
     <Compile Include="Controllers\CarsController.cs" />
     <Compile Include="Controllers\ClientsController.cs" />
+    <Compile Include="Controllers\FdUpController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\NotesController.cs" />
     <Compile Include="Controllers\PerformersController.cs" />

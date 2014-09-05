@@ -59,5 +59,30 @@ namespace AutoSystem.Services.Controllers
 
             return Request.CreateResponse(HttpStatusCode.Created, carModel);
         }
+
+
+        //api/cars?id=23
+        [HttpGet]
+        public CarModel GetById(int id)
+        {
+            var car = this.carsRepository.Get(id);
+
+            var model = new CarModel()
+            {
+                CarId = car.CarId,
+                Brand = car.Brand,
+                Model= car.Model,
+                RegisterPlate = car.RegisterPlate,
+                Engine = car.Engine,
+                EngineSize = car.EngineSize,
+                Chassis = car.Chassis,
+                Telephone = car.Telephone,
+                Town = car.Town,
+                Year = car.Year,
+                ClientId = car.ClientId
+            };
+
+            return model;
+        }
 	}
 }

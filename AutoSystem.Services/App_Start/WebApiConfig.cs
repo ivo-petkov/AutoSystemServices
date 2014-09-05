@@ -14,27 +14,16 @@ namespace AutoSystem.Services
                 new CamelCasePropertyNamesContractResolver();
 
             config.Routes.MapHttpRoute(
-                   name: "ContactsApi",
-                   routeTemplate: "api/contacts/{action}/{id}",
-                   defaults: new { controller = "contacts", id = RouteParameter.Optional }
-               );
+                   name: "RepairsApi",
+                   routeTemplate: "api/repairs/{action}/{id}",
+                   defaults: new { controller = "repairs", id = RouteParameter.Optional }
+
+                   );
 
             config.Routes.MapHttpRoute(
                    name: "PerformersApi",
                    routeTemplate: "api/performers/{action}/{id}",
                    defaults: new { controller = "performers", id = RouteParameter.Optional }
-               );
-
-            config.Routes.MapHttpRoute(
-                   name: "MessagesApi",
-                   routeTemplate: "api/messages/{action}/{id}",
-                   defaults: new { controller = "messages", id = RouteParameter.Optional }
-               );
-
-            config.Routes.MapHttpRoute(
-                   name: "ConversationsApi",
-                   routeTemplate: "api/conversations/{action}/{id}",
-                   defaults: new { controller = "conversations", id = RouteParameter.Optional }
                );
 
             config.Routes.MapHttpRoute(

@@ -33,6 +33,35 @@ namespace AutoSystem.Services.Controllers
             this.carsRepository = new CarsRepository(context);
         }
 
+
+
+        //api/repairs/get?id=23
+        [HttpGet]
+        public HttpResponseMessage GetById(int id)
+        {
+            var repair = this.repairsRepository.Get(id);
+
+            if (repair == null)
+            {
+                return Request.CreateResponse(HttpStatusCode.BadRequest, "Invalid RepairId");
+            }
+
+            var model = new RepairModel()
+            {
+                RepairId = repair.RepairId,
+                Status = repair.Status,
+                Date = repair.Date.ToString(),
+                Milage = repair.Milage,
+                Price = repair.Price,
+                CarId = repair.CarId,
+                PerformerId = repair.PerformerId,
+                Notes = repair.Notes,
+                Attachments = repair.Attachments
+            };
+
+            return Request.CreateResponse(HttpStatusCode.OK, model);
+        }
+
         // api/repairs/add
         [HttpPost]
         [ActionName("add")]
@@ -106,32 +135,6 @@ namespace AutoSystem.Services.Controllers
 
             return Request.CreateResponse(HttpStatusCode.BadRequest, "Invalid session key");
         }
-
-        //api/repairs?id=23
-        [HttpGet]
-        public HttpResponseMessage GetById(int id)
-        {
-            var repair = this.repairsRepository.Get(id);
-
-            if (repair == null)
-            {
-                return Request.CreateResponse(HttpStatusCode.BadRequest, "Invalid RepairId");  
-            }
-
-            var model = new RepairModel()
-            {
-                RepairId = repair.RepairId,
-                Status = repair.Status,
-                Date = repair.Date.ToString(),
-                Milage = repair.Milage,
-                Price = repair.Price,
-                CarId = repair.CarId,
-                PerformerId = repair.PerformerId,
-                Notes = repair.Notes,
-                Attachments = repair.Attachments
-            };
-
-            return Request.CreateResponse(HttpStatusCode.OK, model);
-        }
+        
 	}
 }

@@ -19,5 +19,10 @@ namespace AutoSystem.Repositories
         {
             return dbContext.Clients.FirstOrDefault(u => (u.Name == client.Name && u.Telephone == client.Telephone));
         }
+
+        public Client GetById(int clientId)
+        {
+            return dbContext.Clients.FirstOrDefault(u => u.ClientId == clientId);
+        }
     }    
 }
