@@ -2,6 +2,7 @@
 using AutoSystem.Models;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace AutoSystem.Repositories
 {
@@ -13,6 +14,11 @@ namespace AutoSystem.Repositories
             : base(context)
         {
             this.dbContext = context;
+        }
+
+        public Repair GetById(int repairId)
+        {
+            return dbContext.Repairs.FirstOrDefault(u => u.RepairId == repairId);
         }
 
     }

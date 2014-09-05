@@ -10,12 +10,12 @@ namespace AutoSystem.Services.Models
     {
         public int RepairId { get; set; }
         public RepairStatus Status { get; set; }
-        public DateTime Date { get; set; }
+        public string Date { get; set; }
         public int Milage { get; set; }
         public decimal Price { get; set; }
         public int PerformerId { get; set; }
         public int CarId { get; set; }
-        public IEnumerable<NoteModel> Notes { get; set; }
-        public IEnumerable<AttachmentModel> Attachments { get; set; }
+        public IEnumerable<Note> Notes { get; set; }
+        public IEnumerable<Attachment> Attachments { get; set; }
     }
 }
