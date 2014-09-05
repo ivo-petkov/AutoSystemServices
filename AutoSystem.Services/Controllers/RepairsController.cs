@@ -108,6 +108,7 @@ namespace AutoSystem.Services.Controllers
         }
 
         //api/repairs?id=23
+        [HttpGet]
         public HttpResponseMessage GetById(int id)
         {
             var repair = this.repairsRepository.Get(id);
