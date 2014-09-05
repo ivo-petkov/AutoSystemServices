@@ -108,9 +108,14 @@ namespace AutoSystem.Services.Controllers
         }
 
         //api/repairs?id=23
-        public RepairModel GetById(int id)
+        public HttpResponseMessage GetById(int id)
         {
             var repair = this.repairsRepository.Get(id);
+
+            if (repair == null)
+            {
+                return Request.CreateResponse(HttpStatusCode.BadRequest, "Invalid RepairId");  
+            }
 
             var model = new RepairModel()
             {
@@ -125,7 +130,7 @@ namespace AutoSystem.Services.Controllers
                 Attachments = repair.Attachments
             };
 
-            return model;
+            return Request.CreateResponse(HttpStatusCode.OK, model);
         }
 	}
 }
