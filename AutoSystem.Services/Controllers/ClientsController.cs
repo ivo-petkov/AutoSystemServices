@@ -38,9 +38,7 @@ namespace AutoSystem.Services.Controllers
             {
                 return Request.CreateResponse(HttpStatusCode.Accepted,
                                               "Client already registered!");
-            }
-
-            
+            }            
 
             Client client = new Client()
             {
@@ -53,6 +51,23 @@ namespace AutoSystem.Services.Controllers
             clientsRepository.Add(client);
 
             return Request.CreateResponse(HttpStatusCode.Created, client);
+        }
+
+
+        //api/clients?id=23
+        public ClientModel GetById(int id)
+        {
+            var client = this.clientsRepository.Get(id);
+
+            var model = new ClientModel()
+            {
+                ClientId = client.ClientId,
+                Address = client.Address,
+                Name = client.Name,
+                Telephone = client.Telephone
+            };
+
+            return model;
         }
 	}
 }
