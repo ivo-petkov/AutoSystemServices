@@ -108,24 +108,24 @@ namespace AutoSystem.Services.Controllers
         }
 
         //api/repairs?id=23
-        //public RepairModel GetById(int id)
-        //{
-        //    var repair = this.repairsRepository.Get(id);
+        public RepairModel GetById(int id)
+        {
+            var repair = this.repairsRepository.Get(id);
 
-        //    var model = new RepairModel()
-        //    {
-        //        RepairId = repair.RepairId,
-        //        Status = repair.Status,
-        //        Date = repair.Date.ToString(),
-        //        Milage = repair.Milage,
-        //        Price = repair.Price,
-        //        CarId = repair.CarId,
-        //        PerformerId = repair.PerformerId,
-        //        Notes = repair.Notes,
-        //        Attachments = repair.Attachments
-        //    };
+            var model = new RepairModel()
+            {
+                RepairId = repair.RepairId,
+                Status = repair.Status,
+                Date = repair.Date.ToString(),
+                Milage = repair.Milage,
+                Price = repair.Price,
+                CarId = repair.CarId,
+                PerformerId = repair.PerformerId,
+                Notes = repair.Notes,
+                Attachments = repair.Attachments
+            };
 
-        //    return model;
-        //}
+            return model;
+        }
 	}
 }
