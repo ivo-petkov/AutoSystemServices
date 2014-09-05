@@ -55,6 +55,7 @@ namespace AutoSystem.Services.Controllers
 
 
         //api/clients?id=23
+        [HttpGet]
         public ClientModel GetById(int id)
         {
             var client = this.clientsRepository.Get(id);
