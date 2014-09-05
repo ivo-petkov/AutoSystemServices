@@ -86,8 +86,21 @@ namespace AutoSystem.Services.Controllers
             if (performer != null)
             {
                 var repairs = performer.Repairs;
+                var simpleRepairs = new List<SimpleRepairModel>();
 
-                return Request.CreateResponse(HttpStatusCode.OK, repairs);
+                foreach (var item in repairs)
+                {
+                    var newRepair = new SimpleRepairModel()
+                    {
+                        RepairId = item.RepairId,
+                        Status = item.Status,
+                        Date = item.Date.ToString()
+                    };
+
+                    simpleRepairs.Add(newRepair);
+                }
+
+                return Request.CreateResponse(HttpStatusCode.OK, simpleRepairs);
             }
 
             return Request.CreateResponse(HttpStatusCode.BadRequest, "Invalid session key");
