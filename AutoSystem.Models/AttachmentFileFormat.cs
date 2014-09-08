@@ -1,12 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AutoSystem.Models
-{
-    class AttachmentFileFormat
+{   
+    public enum AttachmentFileFormat
     {
+        Jpg = 0,
+        Png = 1,
+        Bmp = 2,
+        Pdf = 3,
+        Docx = 4
     }
 }

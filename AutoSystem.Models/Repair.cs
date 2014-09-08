@@ -9,6 +9,8 @@ namespace AutoSystem.Models
 
         private ICollection<Attachment> attachments;
 
+        private ICollection<Parts> parts;
+
         public Repair()
         {
             this.notes = new HashSet<Note>();
@@ -23,7 +25,11 @@ namespace AutoSystem.Models
 
         public int Milage { get; set; }
 
-        public decimal Price { get; set; }
+        public decimal FianlePrice { get; set; }
+
+        public decimal PerformerPrice { get; set; }
+
+        public bool IsEditable { get; set; }
 
         public int CarId { get; set; }
         public virtual Car Car { get; set; }
@@ -41,6 +47,12 @@ namespace AutoSystem.Models
         {
             get { return this.attachments; }
             set { this.attachments = value; }
-        }        
+        }
+
+        public virtual ICollection<Parts> Parts 
+        { 
+            get {return this.parts;}
+            set { this.parts = value; }
+        }
     }
 }

@@ -4,8 +4,9 @@ namespace AutoSystem.Models
 {
     public enum AttachmentDocumentType
     {
-        Photo = 0,
-        Pdf = 1,
-        Doc = 2
+        RepairOffer = 0,
+        Invoice = 1,
+        HendoverProtocol = 2,
+        ProformaInvoice = 3
     }
 }

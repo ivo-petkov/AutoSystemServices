@@ -19,6 +19,7 @@ namespace AutoSystem.DataLayer
         public DbSet<Repair> Repairs { get; set; }
         public DbSet<Note> Notes { get; set; }
         public DbSet<Attachment> Attachments { get; set; }
+        public DbSet<Parts> Parts { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

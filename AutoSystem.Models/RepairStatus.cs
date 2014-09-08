@@ -4,8 +4,9 @@ namespace AutoSystem.Models
 {
     public enum RepairStatus
     {
-        Assigned = 0,
-        InProgress = 1,
-        Finished = 2,
+        InProgress = 0,
+        WaitingForParts = 1,
+        ArriveParts = 2,
+        Finished = 3,
     }
 }
