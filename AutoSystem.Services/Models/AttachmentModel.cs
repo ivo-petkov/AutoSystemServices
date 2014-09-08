@@ -10,7 +10,9 @@ namespace AutoSystem.Services.Models
     {
         public int AttachmentId { get; set; }
         public string Name { get; set; }
-        public AttachmentDocumentType Type { get; set; }
+        public AttachmentDocumentType DocumentType { get; set; }
+        public AttachmentFileFormat FileFormat { get; set; }
         public byte[] Data { get; set; }
+        public int RepairId { get; set; }
     }
 }

@@ -52,6 +52,7 @@
     <Compile Include="EfRepository.cs" />
     <Compile Include="IRepository.cs" />
     <Compile Include="NotesReposiotory.cs" />
+    <Compile Include="PartsRepository.cs" />
     <Compile Include="PerformersRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RepairsRepository.cs" />

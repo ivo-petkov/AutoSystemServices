@@ -12,7 +12,9 @@ namespace AutoSystem.Services.Models
         public RepairStatus Status { get; set; }
         public string Date { get; set; }
         public int Milage { get; set; }
-        public decimal Price { get; set; }
+        public decimal FinalPrice { get; set; }
+        public decimal PerformerPrice { get; set; }
+        public bool IsEditable { get; set; }
         public int PerformerId { get; set; }
         public int CarId { get; set; }
         public IEnumerable<Note> Notes { get; set; }

@@ -10,7 +10,7 @@ namespace AutoSystem.Models
 
         public AttachmentDocumentType DocumentType { get; set; }
 
-        public AttachmentFileFormat FiileFormat { get; set; }
+        public AttachmentFileFormat FileFormat { get; set; }
 
         public byte[] Data { get; set; }
 
