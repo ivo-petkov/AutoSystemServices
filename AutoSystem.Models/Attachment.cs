@@ -8,7 +8,7 @@ namespace AutoSystem.Models
 
         public string Name { get; set; }
 
-        public AttachmentType Type { get; set; }
+        public AttachmentDocumentType Type { get; set; }
 
         public byte[] Data { get; set; }
 

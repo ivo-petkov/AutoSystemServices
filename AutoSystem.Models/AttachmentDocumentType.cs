@@ -2,7 +2,7 @@
 
 namespace AutoSystem.Models
 {
-    public enum AttachmentType
+    public enum AttachmentDocumentType
     {
         Photo = 0,
         Pdf = 1,

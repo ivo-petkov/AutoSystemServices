@@ -52,7 +52,7 @@ namespace AutoSystem.Services.Controllers
                 Status = repair.Status,
                 Date = repair.Date.ToString(),
                 Milage = repair.Milage,
-                Price = repair.Price,
+                Price = repair.FianlePrice,
                 CarId = repair.CarId,
                 PerformerId = repair.PerformerId,
                 Notes = repair.Notes,
@@ -80,7 +80,7 @@ namespace AutoSystem.Services.Controllers
                 Performer = performer,
                 Date = DateTime.Now,
                 Milage = value.Milage,
-                Price = value.Price,
+                FianlePrice = value.FianlePrice,
                 Status = value.Status,
 
             };
@@ -94,7 +94,7 @@ namespace AutoSystem.Services.Controllers
                 RepairId = value.RepairId,
                 Date = value.Date.ToString(),
                 Milage = value.Milage,
-                Price = value.Price,
+                Price = value.FianlePrice,
                 Status = value.Status,
                 PerformerId = performer.PerformerId,
                 CarId = car.CarId,
