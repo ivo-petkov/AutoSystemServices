@@ -39,6 +39,12 @@ namespace AutoSystem.Services
                );
 
             config.Routes.MapHttpRoute(
+                   name: "NotesApi",
+                   routeTemplate: "api/notes/{action}/{id}",
+                   defaults: new { controller = "notes", id = RouteParameter.Optional }
+               );
+
+            config.Routes.MapHttpRoute(
                 name: "DefaultApi",
                 routeTemplate: "api/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }

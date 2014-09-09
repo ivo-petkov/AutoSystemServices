@@ -28,7 +28,7 @@ namespace AutoSystem.Services.Controllers
 
         // api/clients/add
         [HttpPost]
-        [ActionName("include")]
+        [ActionName("add")]
         public HttpResponseMessage Add([FromBody]Client value)
         {
             //check for empty properties (not needed)

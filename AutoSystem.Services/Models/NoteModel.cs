@@ -9,5 +9,6 @@ namespace AutoSystem.Services.Models
     {
         public int NoteId { get; set; }
         public string Text { get; set; }
+        public int RepairId { get; set; }
     }
 }
