@@ -46,6 +46,19 @@ namespace AutoSystem.Services.Controllers
                 return Request.CreateResponse(HttpStatusCode.BadRequest, "Invalid RepairId");
             }
 
+            var repairNotes = new List<NoteModel>();
+
+            foreach (var item in repair.Notes)
+            {
+                var newNote = new NoteModel() 
+                {
+                    RepairId = item.RepairID,
+                    Text = item.Text,
+                    NoteId = item.NoteId
+                };
+                repairNotes.Add(newNote);
+            }
+
             var model = new RepairModel()
             {
                 RepairId = repair.RepairId,
@@ -53,9 +66,11 @@ namespace AutoSystem.Services.Controllers
                 Date = repair.Date.ToString(),
                 Milage = repair.Milage,
                 FinalPrice = repair.FianlePrice,
+                PerformerPrice = repair.PerformerPrice,
                 CarId = repair.CarId,
                 PerformerId = repair.PerformerId,
-                Notes = repair.Notes,
+                Notes = repairNotes,
+                Parts = repair.Parts,
                 Attachments = repair.Attachments
             };
 

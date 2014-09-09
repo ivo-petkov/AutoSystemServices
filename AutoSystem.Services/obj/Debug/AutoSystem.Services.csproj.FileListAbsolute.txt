@@ -46,9 +46,6 @@ C:\Users\ivopp_000\Desktop\Task\AutoSystem 1.0\AutoSystemServices\AutoSystem.Ser
 C:\Users\ivopp_000\Desktop\Task\AutoSystem 1.0\AutoSystemServices\AutoSystem.Services\AutoSystem.Services\bin\Microsoft.Data.Edm.xml
 C:\Users\ivopp_000\Desktop\Task\AutoSystem 1.0\AutoSystemServices\AutoSystem.Services\AutoSystem.Services\bin\Microsoft.Data.OData.xml
 C:\Users\ivopp_000\Desktop\Task\AutoSystem 1.0\AutoSystemServices\AutoSystem.Services\AutoSystem.Services\bin\System.Spatial.xml
-C:\Users\ivopp_000\Documents\GitHub\AutoSystemServices\AutoSystem.Services\obj\Debug\AutoSystem.Services.csprojResolveAssemblyReference.cache
-C:\Users\ivopp_000\Documents\GitHub\AutoSystemServices\AutoSystem.Services\obj\Debug\AutoSystem.Services.dll
-C:\Users\ivopp_000\Documents\GitHub\AutoSystemServices\AutoSystem.Services\obj\Debug\AutoSystem.Services.pdb
 C:\Users\ivopp_000\Documents\GitHub\AutoSystemServices\AutoSystem.Services\bin\AutoSystem.Services.dll.config
 C:\Users\ivopp_000\Documents\GitHub\AutoSystemServices\AutoSystem.Services\bin\AutoSystem.Services.dll
 C:\Users\ivopp_000\Documents\GitHub\AutoSystemServices\AutoSystem.Services\bin\AutoSystem.Services.pdb
@@ -94,3 +91,6 @@ C:\Users\ivopp_000\Documents\GitHub\AutoSystemServices\AutoSystem.Services\bin\S
 C:\Users\ivopp_000\Documents\GitHub\AutoSystemServices\AutoSystem.Services\bin\System.Web.WebPages.Deployment.xml
 C:\Users\ivopp_000\Documents\GitHub\AutoSystemServices\AutoSystem.Services\bin\System.Web.WebPages.Razor.xml
 C:\Users\ivopp_000\Documents\GitHub\AutoSystemServices\AutoSystem.Services\bin\Antlr3.Runtime.pdb
+C:\Users\ivopp_000\Documents\GitHub\AutoSystemServices\AutoSystem.Services\obj\Debug\AutoSystem.Services.csprojResolveAssemblyReference.cache
+C:\Users\ivopp_000\Documents\GitHub\AutoSystemServices\AutoSystem.Services\obj\Debug\AutoSystem.Services.dll
+C:\Users\ivopp_000\Documents\GitHub\AutoSystemServices\AutoSystem.Services\obj\Debug\AutoSystem.Services.pdb

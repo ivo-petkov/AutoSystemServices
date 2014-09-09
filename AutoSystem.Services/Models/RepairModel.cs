@@ -17,7 +17,8 @@ namespace AutoSystem.Services.Models
         public bool IsEditable { get; set; }
         public int PerformerId { get; set; }
         public int CarId { get; set; }
-        public IEnumerable<Note> Notes { get; set; }
-        public IEnumerable<Attachment> Attachments { get; set; }
+        public ICollection<NoteModel> Notes { get; set; }
+        public ICollection<Attachment> Attachments { get; set; }
+        public ICollection<Parts> Parts { get; set; }
     }
 }
