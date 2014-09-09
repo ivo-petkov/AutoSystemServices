@@ -52,9 +52,19 @@ namespace AutoSystem.Services.Controllers
         public HttpResponseMessage GetAllNotes(int repairId)
         {
             var repair = this.repairsRepository.GetById(repairId);
-
             var notes = new List<NoteModel>();
-            notes = repair.Notes as List<NoteModel>;
+
+            foreach (var item in notes)
+            {
+                var newNote = new NoteModel()
+                {
+                    NoteId = item.NoteId,
+                    Text = item.Text,
+                    RepairId = item.RepairId
+                };
+
+                notes.Add(newNote);
+            }
 
             return Request.CreateResponse(HttpStatusCode.OK, notes);
         }
