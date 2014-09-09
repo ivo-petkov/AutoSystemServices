@@ -53,8 +53,8 @@ namespace AutoSystem.Services.Controllers
         {
             var repair = this.repairsRepository.GetById(repairId);
 
-            var notes = new IEnumerable<NoteModel>();
-            notes = repair.Notes as IEnumerable<NoteModel>;
+            var notes = new List<NoteModel>();
+            notes = repair.Notes as List<NoteModel>;
 
             return Request.CreateResponse(HttpStatusCode.OK, notes);
         }
