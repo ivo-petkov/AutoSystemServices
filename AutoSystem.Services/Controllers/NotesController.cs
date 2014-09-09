@@ -54,13 +54,13 @@ namespace AutoSystem.Services.Controllers
             var repair = this.repairsRepository.GetById(repairId);
             var notes = new List<NoteModel>();
 
-            foreach (var item in notes)
+            foreach (var item in repair.Notes)
             {
                 var newNote = new NoteModel()
                 {
                     NoteId = item.NoteId,
                     Text = item.Text,
-                    RepairId = item.RepairId
+                    RepairId = item.RepairID
                 };
 
                 notes.Add(newNote);
