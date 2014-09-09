@@ -19,6 +19,12 @@ namespace AutoSystem.Models
 
         public string Address { get; set; }
 
+        public string Bulstat { get; set; }
+
+        public string Email { get; set; }
+
+        public string Mol { get; set; }
+
         public string Username { get; set; }
 
         public string AuthCode { get; set; }
