@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AutoSystem.Models;
+using System;
 using System.Linq;
 
 namespace AutoSystem.Services.Models
@@ -17,5 +18,6 @@ namespace AutoSystem.Services.Models
         public string RegisterPlate { get; set; }
         public int ClientId { get; set; }
         public ClientModel Client { get; set; }
+
     }
 }

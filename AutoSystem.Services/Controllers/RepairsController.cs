@@ -61,7 +61,31 @@ namespace AutoSystem.Services.Controllers
                 repairNotes.Add(newNote);
             }
 
-            //var carModel = new CarModel(repair.Car);
+            Car repairCar = repair.Car;
+            Client carClient = repairCar.Client;
+
+            var clientModel = new ClientModel() 
+            {
+                ClientId = carClient.ClientId,
+                Name = carClient.Name,
+                Telephone = carClient.Telephone,
+                Address = carClient.Address
+            };
+
+            var carModel = new CarModel()
+            {
+                CarId = repairCar.CarId,
+                RegisterPlate = repairCar.RegisterPlate,
+                Model = repairCar.Model,
+                Brand = repairCar.Brand,
+                Year = repairCar.Year,
+                Town = repairCar.Town,
+                Telephone = repairCar.Telephone,
+                Engine = repairCar.Engine,
+                EngineSize = repairCar.EngineSize,
+                Chassis = repairCar.Chassis,
+                Client = clientModel
+            };
            
 
             var repairModel = new RepairModel()
@@ -73,14 +97,14 @@ namespace AutoSystem.Services.Controllers
                 FinalPrice = repair.FianlePrice,
                 PerformerPrice = repair.PerformerPrice,
                 CarId = repair.CarId,
-                //Car = carModel,
+                Car = carModel,
                 PerformerId = repair.PerformerId,
                 Notes = repairNotes,
                 Parts = repair.Parts,
                 Attachments = repair.Attachments
             };
 
-            return Request.CreateResponse(HttpStatusCode.OK, repair);
+            return Request.CreateResponse(HttpStatusCode.OK, repairModel);
         }
 
         // api/repairs/add
