@@ -24,6 +24,7 @@ namespace AutoSystem.Services.Controllers
         private RepairsRepository repairsRepository;
         private PerformersRepository performersRepository;
         private CarsRepository carsRepository;
+        private ClientsRepository clientsRepository;
 
         public RepairsController()
         {
@@ -31,6 +32,7 @@ namespace AutoSystem.Services.Controllers
             this.repairsRepository = new RepairsRepository(context);
             this.performersRepository = new PerformersRepository(context);
             this.carsRepository = new CarsRepository(context);
+            this.clientsRepository = new ClientsRepository(context);
         }
 
 
@@ -150,6 +152,87 @@ namespace AutoSystem.Services.Controllers
 
             return Request.CreateResponse(HttpStatusCode.BadRequest, "Invalid session key");
         }
+
+        ////api/repairs/edit
+        //[HttpPost]
+        //[ActionName("edit")]
+        //public HttpResponseMessage EditPerformer([FromBody]Repair editedRepairData)
+        //{
+        //    int repairId = editedRepairData.RepairId;
+        //    var repair = repairsRepository.GetById(repairId);
+
+        //    if (repair == null)
+        //    {
+        //        return Request.CreateResponse(HttpStatusCode.BadRequest, "Invalid RepairId");
+        //    }
+
+        //    var uneditedCar = this.carsRepository.GetById(editedRepairData.CarId);
+        //    var uneditedClient = this.clientsRepository.GetById(uneditedCar.ClientId);
+
+
+        //    Car editedCarData = editedRepairData.Car;
+        //    Client editedClientData = editedCarData.Client;
+
+        //    //check if client is entirely new or edited
+        //    if (uneditedClient.Name != editedClientData.Name && uneditedClient.Address != editedClientData.Address && uneditedClient.Telephone != editedClientData.Telephone)
+        //    { 
+
+        //    }
+
+
+        //    var repairNotesModel = new List<NoteModel>();
+        //    var repairPartsModel = new List<PartsModel>();
+        //    var repairAttachmentsModel = new List<AttachmentModel>();
+
+        //    //adding the notes of the repair
+        //    foreach (var note in editedRepairData.Notes)
+        //    {
+        //        NoteModel newNote = new NoteModel()
+        //        {
+        //            NoteId = note.NoteId,
+        //            Text = note.Text,
+        //            RepairId = note.RepairId
+        //        };
+        //        repairNotesModel.Add(newNote);
+        //    }
+
+        //    //adding the attachments of the repair
+        //    foreach (var attachment in editedRepairData.Attachments)
+        //    {
+        //        AttachmentModel newAttachment = new AttachmentModel()
+        //        {
+        //            AttachmentId = attachment.AttachmentId,
+        //        };
+        //    }
+
+        //    var repairToEdit = new Repair()
+        //    {
+        //        PerformerId = repair.PerformerId,
+        //        Username = repair.Username,
+        //        Name = editedRepairData.Name,
+        //        Address = editedRepairData.Address,
+        //        Telephone = editedRepairData.Telephone,
+        //        AuthCode = editedRepairData.OldAuthCode
+        //    };
+
+        //    if (performersRepository.EditPerformer(repairToEdit, editedRepairData.NewAuthCode))
+        //    {
+        //        var updatedPerformer = performersRepository.Get(repairToEdit.PerformerId);
+        //        var performerModel = new PerformerModel()
+        //        {
+        //            PerformerId = updatedPerformer.PerformerId,
+        //            Username = updatedPerformer.Username,
+        //            SessionKey = sessionKey,
+        //            Name = updatedPerformer.Name,
+        //            Address = updatedPerformer.Address,
+        //            Telephone = updatedPerformer.Telephone
+        //        };
+
+        //        return Request.CreateResponse(HttpStatusCode.OK, performerModel);
+        //    }
+
+        //    return Request.CreateResponse(HttpStatusCode.BadRequest, "Could not edit user");
+        //}
         
 	}
 }

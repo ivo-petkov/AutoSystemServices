@@ -7,9 +7,12 @@ namespace AutoSystem.Models
     {
         private ICollection<Car> cars;
 
+        private ICollection<Performer> performers;
+
         public Client()
         {
             this.cars = new HashSet<Car>();
+            this.performers = new HashSet<Performer>();
         }
 
         public int ClientId { get; set; }
@@ -20,11 +23,16 @@ namespace AutoSystem.Models
 
         public string Address { get; set; }        
 
-        public ICollection<Car> Cars
+        public virtual ICollection<Car> Cars
         {
             get { return this.cars; }
             set { this.cars = value; }
         }
-        
+
+        public virtual ICollection<Performer> Performers
+        {
+            get { return performers; }
+            set { performers = value; }
+        }               
     }
 }

@@ -22,3 +22,15 @@ C:\Users\ivopp_000\Documents\GitHub\AutoSystemServices\AutoSystem.DataLayer\bin\
 C:\Users\ivopp_000\Documents\GitHub\AutoSystemServices\AutoSystem.DataLayer\obj\Debug\AutoSystem.DataLayer.csprojResolveAssemblyReference.cache
 C:\Users\ivopp_000\Documents\GitHub\AutoSystemServices\AutoSystem.DataLayer\obj\Debug\AutoSystem.DataLayer.dll
 C:\Users\ivopp_000\Documents\GitHub\AutoSystemServices\AutoSystem.DataLayer\obj\Debug\AutoSystem.DataLayer.pdb
+C:\Users\ivopp_000\Desktop\AutoSYSTEMLOCALCOPY\AutoSystem.DataLayer\bin\Debug\AutoSystem.DataLayer.dll.config
+C:\Users\ivopp_000\Desktop\AutoSYSTEMLOCALCOPY\AutoSystem.DataLayer\bin\Debug\AutoSystem.DataLayer.dll
+C:\Users\ivopp_000\Desktop\AutoSYSTEMLOCALCOPY\AutoSystem.DataLayer\bin\Debug\AutoSystem.DataLayer.pdb
+C:\Users\ivopp_000\Desktop\AutoSYSTEMLOCALCOPY\AutoSystem.DataLayer\bin\Debug\AutoSystem.Models.dll
+C:\Users\ivopp_000\Desktop\AutoSYSTEMLOCALCOPY\AutoSystem.DataLayer\bin\Debug\EntityFramework.dll
+C:\Users\ivopp_000\Desktop\AutoSYSTEMLOCALCOPY\AutoSystem.DataLayer\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\ivopp_000\Desktop\AutoSYSTEMLOCALCOPY\AutoSystem.DataLayer\bin\Debug\AutoSystem.Models.pdb
+C:\Users\ivopp_000\Desktop\AutoSYSTEMLOCALCOPY\AutoSystem.DataLayer\bin\Debug\EntityFramework.xml
+C:\Users\ivopp_000\Desktop\AutoSYSTEMLOCALCOPY\AutoSystem.DataLayer\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\ivopp_000\Desktop\AutoSYSTEMLOCALCOPY\AutoSystem.DataLayer\obj\Debug\AutoSystem.DataLayer.csprojResolveAssemblyReference.cache
+C:\Users\ivopp_000\Desktop\AutoSYSTEMLOCALCOPY\AutoSystem.DataLayer\obj\Debug\AutoSystem.DataLayer.dll
+C:\Users\ivopp_000\Desktop\AutoSYSTEMLOCALCOPY\AutoSystem.DataLayer\obj\Debug\AutoSystem.DataLayer.pdb

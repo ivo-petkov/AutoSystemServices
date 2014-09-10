@@ -7,6 +7,7 @@ namespace AutoSystem.Models
         RepairOffer = 0,
         Invoice = 1,
         HendoverProtocol = 2,
-        ProformaInvoice = 3
+        ProformaInvoice = 3,
+        Other = 4
     }
 }

@@ -69,40 +69,57 @@ namespace AutoSystem.Services.Controllers
             return Request.CreateResponse(HttpStatusCode.OK, notes);
         }
 
-        //api/notes/edit?id=23
-        [HttpGet]
-        [ActionName("edit")]
-        public HttpResponseMessage EditNote([FromBody]NoteModel value)
-        {
-            var note = this.notesRepository.GetById(value.NoteId);
-            if (note == null)
-            {
-                return Request.CreateResponse(HttpStatusCode.BadRequest, "Invalid NoteId");
-            }
+        ////api/notes/edit
+        //[HttpPost]
+        //[ActionName("edit")]
+        //public HttpResponseMessage EditNote([FromBody]IEnumerable<NoteModel> editedNotes)
+        //{
+        //    if (editedNotes == null)
+        //    {
+        //        return Request.CreateResponse(HttpStatusCode.OK, "No notes to edit.");
+        //    }
 
-            var noteToEdit = new Note()
-            {
-                NoteId = note.NoteId,
-                Text = note.Text,
-                RepairID = note.RepairID,
-                Repair = note.Repair
-            };
+        //    var repairId = editedNotes.First().RepairId;
+        //    var repair = this.repairsRepository.GetById(repairId);
+        //    if (repair == null)
+        //    {
+        //        return Request.CreateResponse(HttpStatusCode.BadRequest, "Invalid RepairId");
+        //    }
 
-            if (notesRepository.EditNote(noteToEdit))
-            {
-                var updatedNote = notesRepository.Get(noteToEdit.NoteId);
-                var noteModel = new NoteModel()
-                {
-                    NoteId = updatedNote.NoteId,
-                    Text = updatedNote.Text,
-                    RepairId = updatedNote.RepairID,
-                };
+        //    foreach (var note in editedNotes)
+        //    {
+        //        var newNote = this.notesRepository.GetById(note.NoteId);
+        //        if (newNote == null)
+        //        {
+        //            return Request.CreateResponse(HttpStatusCode.BadRequest, "Invalid NoteId");
+        //        }
 
-                return Request.CreateResponse(HttpStatusCode.OK, noteModel);
-                
-            }
+        //        var noteToEdit = new Note()
+        //        {
+        //            NoteId = newNote.NoteId,
+        //            Text = newNote.Text,
+        //            RepairID = newNote.RepairID,
+        //            Repair = newNote.Repair
+        //        };
 
-            return Request.CreateResponse(HttpStatusCode.BadRequest, "Could not edit note");
-        }
+        //        if (notesRepository.EditNote(noteToEdit))
+        //        {
+        //            var updatedNote = notesRepository.Get(noteToEdit.NoteId);
+        //            var noteModel = new NoteModel()
+        //            {
+        //                NoteId = updatedNote.NoteId,
+        //                Text = updatedNote.Text,
+        //                RepairId = updatedNote.RepairID,
+        //            };
+
+        //            //add
+        //            return Request.CreateResponse(HttpStatusCode.OK, noteModel);
+
+        //        }   
+
+        //    }           
+
+        //    return Request.CreateResponse(HttpStatusCode.BadRequest, "Could not edit notes");
+        //}
 	}
 }

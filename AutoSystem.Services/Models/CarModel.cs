@@ -16,5 +16,6 @@ namespace AutoSystem.Services.Models
         public string Engine { get; set; }
         public string RegisterPlate { get; set; }
         public int ClientId { get; set; }
+        public ClientModel Client { get; set; }
     }
 }

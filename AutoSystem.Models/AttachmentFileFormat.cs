@@ -8,6 +8,7 @@ namespace AutoSystem.Models
         Png = 1,
         Bmp = 2,
         Pdf = 3,
-        Docx = 4
+        Docx = 4,
+        Other = 5
     }
 }

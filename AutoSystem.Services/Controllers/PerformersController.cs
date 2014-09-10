@@ -157,6 +157,8 @@ namespace AutoSystem.Services.Controllers
             }
         }
 
+
+        //api/performers/logout
         [HttpGet]
         [ActionName("logout")]
         public HttpResponseMessage Logout(

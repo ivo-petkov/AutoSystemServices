@@ -15,6 +15,7 @@ namespace AutoSystem.Models
         {
             this.notes = new HashSet<Note>();
             this.attachments = new HashSet<Attachment>();
+            this.parts = new HashSet<Parts>();
         }
 
         public int RepairId { get; set; }
