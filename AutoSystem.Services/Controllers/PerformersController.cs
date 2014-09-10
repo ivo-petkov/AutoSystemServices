@@ -208,14 +208,14 @@ namespace AutoSystem.Services.Controllers
             return Request.CreateResponse(HttpStatusCode.BadRequest, "Invalid session key");
         }
 
-        // api/performers/addclient?performerId=23&clientId=23
+        // api/performers/addclient
         [HttpPost]
         [ActionName("addclient")]
-        public HttpResponseMessage AddClient([FromBody]int performerId, int clientId)
+        public HttpResponseMessage AddClient([FromBody]PerformerClientModel model)
         {
             //Performer performer = performersRepository.Get(performerId);
-            Client client = clientsRepository.Get(clientId);
-            if (this.performersRepository.AddClient(client, performerId))
+            Client client = clientsRepository.Get(model.ClientId);
+            if (this.performersRepository.AddClient(client, model.PerformerId))
             {
                 return Request.CreateResponse(HttpStatusCode.OK, "Client Added to performer");
             }

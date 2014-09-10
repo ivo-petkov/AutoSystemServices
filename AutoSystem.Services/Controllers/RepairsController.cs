@@ -154,58 +154,58 @@ namespace AutoSystem.Services.Controllers
             return Request.CreateResponse(HttpStatusCode.BadRequest, "Invalid session key");
         }
 
-        //api/repairs/edit
-        [HttpPost]
-        [ActionName("edit")]
-        public HttpResponseMessage EditPerformer([FromBody]RepairModel editedRepairData)
-        {
-            int repairId = editedRepairData.RepairId;
-            var repair = repairsRepository.GetById(repairId);
+        ////api/repairs/edit
+        //[HttpPost]
+        //[ActionName("edit")]
+        //public HttpResponseMessage EditPerformer([FromBody]RepairModel editedRepairData)
+        //{
+        //    int repairId = editedRepairData.RepairId;
+        //    var repair = repairsRepository.GetById(repairId);
 
-            if (repair == null)
-            {
-                return Request.CreateResponse(HttpStatusCode.BadRequest, "Invalid RepairId");
-            }
+        //    if (repair == null)
+        //    {
+        //        return Request.CreateResponse(HttpStatusCode.BadRequest, "Invalid RepairId");
+        //    }
 
-            var uneditedCar = this.carsRepository.GetById(editedRepairData.CarId);
-            CarModel editedCarData = editedRepairData.Car;
-            //editedCarData.ClientId = editedRepairData.ClientId;
-            Car newCar = new Car() 
-            {
-                Brand = editedCarData.Brand,
-                Model = editedCarData.Model,
-                RegisterPlate = editedCarData.RegisterPlate,
-                Telephone = editedCarData.Telephone,
-                Town = editedCarData.Town,
-                Year = editedCarData.Year,
-                Chassis = editedCarData.Chassis,
-                Engine = editedCarData.Engine,
-                EngineSize = editedCarData.EngineSize,
-                ClientId = editedCarData.ClientId,
-            };
+        //    var uneditedCar = this.carsRepository.GetById(editedRepairData.CarId);
+        //    CarModel editedCarData = editedRepairData.Car;
+        //    //editedCarData.ClientId = editedRepairData.ClientId;
+        //    Car newCar = new Car() 
+        //    {
+        //        Brand = editedCarData.Brand,
+        //        Model = editedCarData.Model,
+        //        RegisterPlate = editedCarData.RegisterPlate,
+        //        Telephone = editedCarData.Telephone,
+        //        Town = editedCarData.Town,
+        //        Year = editedCarData.Year,
+        //        Chassis = editedCarData.Chassis,
+        //        Engine = editedCarData.Engine,
+        //        EngineSize = editedCarData.EngineSize,
+        //        ClientId = editedCarData.ClientId,
+        //    };
 
-            if (editedRepairData.Car.RegisterPlate != uneditedCar.RegisterPlate)
-            {               
-                carsRepository.Add(newCar);
-            }
-            else
-            {
-                Car existingCar = carsRepository.GetByRegisterPlate(editedRepairData.Car.RegisterPlate);              
+        //    if (editedRepairData.Car.RegisterPlate != uneditedCar.RegisterPlate)
+        //    {               
+        //        carsRepository.Add(newCar);
+        //    }
+        //    else
+        //    {
+        //        Car existingCar = carsRepository.GetByRegisterPlate(editedRepairData.Car.RegisterPlate);              
 
-                if (!carsRepository.EditCar(newCar, existingCar.CarId))
-                {
-                    return Request.CreateResponse(HttpStatusCode.BadRequest, "Could not edit car");
-                }
-            }
+        //        if (!carsRepository.EditCar(newCar, existingCar.CarId))
+        //        {
+        //            return Request.CreateResponse(HttpStatusCode.BadRequest, "Could not edit car");
+        //        }
+        //    }
 
-            Car updatedCar = carsRepository.GetByRegisterPlate(editedRepairData.Car.RegisterPlate);
-            Repair updatedRepair = new Repair()
-            {
+        //    Car updatedCar = carsRepository.GetByRegisterPlate(editedRepairData.Car.RegisterPlate);
+        //    Repair updatedRepair = new Repair()
+        //    {
 
-            };
-            return Request.CreateResponse(HttpStatusCode.BadRequest, "Could not edit car");
+        //    };
+        //    return Request.CreateResponse(HttpStatusCode.BadRequest, "Could not edit car");
             
-        }
+        //}
         
 	}
 }
