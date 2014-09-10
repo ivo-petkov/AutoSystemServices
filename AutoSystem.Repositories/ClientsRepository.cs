@@ -24,5 +24,6 @@ namespace AutoSystem.Repositories
         {
             return dbContext.Clients.FirstOrDefault(u => u.ClientId == clientId);
         }
+       
     }    
 }

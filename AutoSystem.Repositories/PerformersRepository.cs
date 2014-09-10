@@ -65,5 +65,18 @@ namespace AutoSystem.Repositories
             dbContext.SaveChanges();
             return true;
         }
+
+        public bool AddClient(Client client, int performerId)
+        {
+            var performer = dbContext.Performers.Find(performerId);
+            if (performer == null)
+            {
+                return false;
+            }
+            performer.Clients.Add(client);
+
+            dbContext.SaveChanges();
+            return true;
+        }
     }      
 }

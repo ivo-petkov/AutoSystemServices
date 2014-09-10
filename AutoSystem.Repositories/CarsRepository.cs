@@ -25,5 +25,23 @@ namespace AutoSystem.Repositories
         {
             return dbContext.Cars.FirstOrDefault(u => u.CarId == id);
         }
+
+        public bool EditCar(Car editedCarData, int id)
+        {
+            var car = dbContext.Cars.Find(id);
+            car.Brand = editedCarData.Brand;
+            car.Model = editedCarData.Model;
+            car.Year = editedCarData.Year;
+            car.RegisterPlate = editedCarData.RegisterPlate;
+            car.Telephone = editedCarData.Telephone;
+            car.Town = editedCarData.Town;
+            car.Chassis = editedCarData.Chassis;
+            car.Engine = editedCarData.Engine;
+            car.EngineSize = editedCarData.EngineSize;
+            car.ClientId = editedCarData.ClientId;
+
+            dbContext.SaveChanges();
+            return true;
+        }
     }
 }

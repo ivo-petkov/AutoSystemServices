@@ -18,6 +18,7 @@ namespace AutoSystem.Services.Controllers
     public class PerformersController : ApiController
     {
         private PerformersRepository performersRepository;
+        private ClientsRepository clientsRepository;
         private const int SessionKeyLength = 50;
         private const string SessionKeyChars =
             "qwertyuioplkjhgfdsazxcvbnmQWERTYUIOPLKJHGFDSAZXCVBNM";
@@ -27,6 +28,7 @@ namespace AutoSystem.Services.Controllers
         {
             var context = new AutoSystemContext();
             this.performersRepository = new PerformersRepository(context);
+            this.clientsRepository = new ClientsRepository(context);
         }
 
         [HttpGet]
@@ -173,6 +175,56 @@ namespace AutoSystem.Services.Controllers
             performersRepository.Logout(performer);
             return Request.CreateResponse(HttpStatusCode.OK);
         }
+
+        // api/performers/allclients
+        [HttpGet]
+        [ActionName("allclients")]
+        public HttpResponseMessage GetAllClients(
+            [ValueProvider(typeof(HeaderValueProviderFactory<String>))] String sessionKey)
+        {
+            Performer performer = performersRepository.GetBySessionKey(sessionKey);
+
+            if (performer != null)
+            {
+                var clients = performer.Clients;
+                var simpleClients = new List<ClientModel>();
+
+                foreach (var item in clients)
+                {
+                    var newCliet = new ClientModel()
+                    {
+                        ClientId = item.ClientId,
+                        Name = item.Name,
+                        Address = item.Address,
+                        Telephone = item.Telephone
+                    };
+
+                    simpleClients.Add(newCliet);
+                }
+
+                return Request.CreateResponse(HttpStatusCode.OK, simpleClients);
+            }
+
+            return Request.CreateResponse(HttpStatusCode.BadRequest, "Invalid session key");
+        }
+
+        // api/performers/addclient?performerId=23&clientId=23
+        [HttpPost]
+        [ActionName("addclient")]
+        public HttpResponseMessage AddClient(int performerId, int clientId)
+        {
+            //Performer performer = performersRepository.Get(performerId);
+            Client client = clientsRepository.Get(clientId);
+            if (this.performersRepository.AddClient(client, performerId))
+            {
+                return Request.CreateResponse(HttpStatusCode.OK, "Client Added to performer");
+            }
+
+            return Request.CreateResponse(HttpStatusCode.BadRequest, "Invalid performerId");
+                        
+        }
+
+
 
         private string GenerateSessionKey(int performerId)
         {
