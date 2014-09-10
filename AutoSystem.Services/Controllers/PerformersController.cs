@@ -211,7 +211,7 @@ namespace AutoSystem.Services.Controllers
         // api/performers/addclient?performerId=23&clientId=23
         [HttpPost]
         [ActionName("addclient")]
-        public HttpResponseMessage AddClient(int performerId, int clientId)
+        public HttpResponseMessage AddClient([FromBody]int performerId, int clientId)
         {
             //Performer performer = performersRepository.Get(performerId);
             Client client = clientsRepository.Get(clientId);
