@@ -141,7 +141,8 @@ namespace AutoSystem.Services.Controllers
                     {
                         RepairId = item.RepairId,
                         Status = item.Status,
-                        Date = item.Date.ToString()
+                        Date = item.Date.ToString(),
+                        ClientName = item.Car.Client.Name
                     };
 
                     simpleRepairs.Add(newRepair);

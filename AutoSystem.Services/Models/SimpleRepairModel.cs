@@ -11,5 +11,6 @@ namespace AutoSystem.Services.Models
         public int RepairId { get; set; }
         public RepairStatus Status { get; set; }
         public string Date { get; set; }
+        public string ClientName { get; set; }
     }
 }
