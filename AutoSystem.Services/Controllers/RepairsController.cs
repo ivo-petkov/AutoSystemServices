@@ -202,7 +202,7 @@ namespace AutoSystem.Services.Controllers
                 return Request.CreateResponse(HttpStatusCode.BadRequest, "Invalid RepairId");
             }
 
-            var uneditedCar = this.carsRepository.GetById(editedRepairData.CarId);
+            var uneditedCar = this.carsRepository.GetById(editedRepairData.Car.CarId);
             CarModel editedCarData = editedRepairData.Car;
             //editedCarData.ClientId = editedRepairData.ClientId;
             Car newCar = new Car()
