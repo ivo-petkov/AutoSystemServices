@@ -235,26 +235,19 @@ namespace AutoSystem.Services.Controllers
 
             Car updatedCar = carsRepository.GetByRegisterPlate(editedRepairData.Car.RegisterPlate);
 
-            ICollection<Note> editedNotesData = new ICollection<Note>();
-            foreach (var note in editedRepairData.Notes)
-            {
-                Note newNote = new Note()
-                {
-                    NoteId = note.NoteId,
-                    Text = note.Text,
-                    RepairID = note.RepairId
-                };
+            EditNotes(editedRepairData);
+            EditParts(editedRepairData);
+            //EditAtachments(editedRepairData);
 
-                editedNotesData.Add(newNote);
-            }
-            notesRepository.EditRepairNotes(editedNotesData, editedRepairData.RepairId);
-           
-           
+
+
+            DateTime noRoundtripDate = DateTime.Parse(editedRepairData.Date, null,
+                                          DateTimeStyles.None);           
 
             Repair updatedRepair = new Repair()
             {
                 RepairId = editedRepairData.RepairId,
-                Date = DateTime.ParseExact(editedRepairData.Date, "dd/MM/yyyy HH:mm:ss tt", CultureInfo.InvariantCulture), //Convert.ToDateTime(editedRepairData.Date),
+                Date = noRoundtripDate,
                 Status = editedRepairData.Status,
                 Milage = editedRepairData.Milage,
                 FianlePrice = editedRepairData.FinalPrice,
@@ -271,6 +264,58 @@ namespace AutoSystem.Services.Controllers
             return Request.CreateResponse(HttpStatusCode.OK,"Repair Edited.");
 
         }
+
+        private void EditNotes(RepairModel editedRepairData)
+        {
+            List<Note> editedNotesData = new List<Note>();
+            foreach (var note in editedRepairData.Notes)
+            {
+                Note newNote = new Note()
+                {
+                    NoteId = note.NoteId,
+                    Text = note.Text,
+                    RepairID = note.RepairId
+                };
+
+                editedNotesData.Add(newNote);
+            }
+            notesRepository.EditRepairNotes(editedNotesData, editedRepairData.RepairId);
+        }
+
+        private void EditParts(RepairModel editedRepairData)
+        {
+            List<Parts> editedPartsData = new List<Parts>();
+            foreach (var partsInfo in editedRepairData.Parts)
+            {
+                Parts newParts = new Parts()
+                {
+                    PartsId = partsInfo.PartsId,
+                    Text = partsInfo.Text,
+                    PriceInfo = partsInfo.PriceInfo,
+                    RepairId = partsInfo.RepairId                     
+                };
+
+                editedPartsData.Add(newParts);
+            }
+            partsRepository.EditRepairParts(editedPartsData, editedRepairData.RepairId);
+        }
+
+        //private void EditAtachments(RepairModel editedRepairData)
+        //{
+        //    List<Note> editedNotesData = new List<Note>();
+        //    foreach (var note in editedRepairData.Notes)
+        //    {
+        //        Note newNote = new Note()
+        //        {
+        //            NoteId = note.NoteId,
+        //            Text = note.Text,
+        //            RepairID = note.RepairId
+        //        };
+
+        //        editedNotesData.Add(newNote);
+        //    }
+        //    notesRepository.EditRepairNotes(editedNotesData, editedRepairData.RepairId);
+        //}
         
 	}
 }

@@ -39,9 +39,9 @@ namespace AutoSystem.Repositories
             repair.IsEditable = (updatedRepair.IsEditable != null) ? updatedRepair.IsEditable : repair.IsEditable;
             repair.PerformerId = (updatedRepair.PerformerId != null) ? updatedRepair.PerformerId : repair.PerformerId;
             repair.Date = (updatedRepair.Date != null) ? updatedRepair.Date : repair.Date;
-            repair.Notes = (updatedRepair.Notes != null) ? updatedRepair.Notes : repair.Notes;
-            repair.Parts = (updatedRepair.Parts != null) ? updatedRepair.Parts : repair.Parts;
-            repair.Attachments = (updatedRepair.Attachments != null) ? updatedRepair.Attachments : repair.Attachments;
+            //repair.Notes = (updatedRepair.Notes != null) ? updatedRepair.Notes : repair.Notes;
+            //repair.Parts = (updatedRepair.Parts != null) ? updatedRepair.Parts : repair.Parts;
+            //repair.Attachments = (updatedRepair.Attachments != null) ? updatedRepair.Attachments : repair.Attachments;
 
             dbContext.SaveChanges();
             return true;
