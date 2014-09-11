@@ -38,7 +38,7 @@ namespace AutoSystem.Repositories
             repair.FianlePrice = (updatedRepair.FianlePrice != null) ? updatedRepair.FianlePrice : repair.FianlePrice;
             repair.IsEditable = (updatedRepair.IsEditable != null) ? updatedRepair.IsEditable : repair.IsEditable;
             repair.PerformerId = (updatedRepair.PerformerId != null) ? updatedRepair.PerformerId : repair.PerformerId;
-            repair.Date = DateTime.Now;
+            repair.Date = (updatedRepair.Date != null) ? updatedRepair.Date : repair.Date;
             repair.Notes = (updatedRepair.Notes != null) ? updatedRepair.Notes : repair.Notes;
             repair.Parts = (updatedRepair.Parts != null) ? updatedRepair.Parts : repair.Parts;
             repair.Attachments = (updatedRepair.Attachments != null) ? updatedRepair.Attachments : repair.Attachments;

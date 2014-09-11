@@ -1,6 +1,7 @@
 ﻿using AutoSystem.DataLayer;
 using AutoSystem.Models;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace AutoSystem.Repositories
@@ -13,11 +14,17 @@ namespace AutoSystem.Repositories
             : base(context)
         {
             this.dbContext = context;
-        }
-
-        public Note GetById(int noteId)
+        }       
+        
+        public void EditRepairNotes(ICollection<Note> editedNotes, int repairId)
         {
-            return dbContext.Notes.FirstOrDefault(u => u.NoteId == noteId);
+            foreach (var note in editedNotes)
+            {
+                if (!EditNote(note))
+                {
+                    AddNote(note, repairId);
+                }
+            }
         }
 
         public bool EditNote(Note value)
@@ -25,8 +32,8 @@ namespace AutoSystem.Repositories
             var note = dbContext.Notes.Find(value.NoteId);
 
             if (note == null)
-            {               
-                return false;                
+            {
+                return false;
             }
 
             if (String.IsNullOrWhiteSpace(value.Text) || String.IsNullOrEmpty(value.Text))
@@ -40,6 +47,21 @@ namespace AutoSystem.Repositories
 
             dbContext.SaveChanges();
             return true;
+        }
+
+        public void AddNote(Note note, int repairId)
+        {
+            if (!(String.IsNullOrWhiteSpace(note.Text) || String.IsNullOrEmpty(note.Text)))
+            {
+                Note newNote = new Note() 
+                {
+                    Text = note.Text,
+                    RepairID = repairId
+                };
+
+                this.Add(newNote);
+                dbContext.SaveChanges();
+            }
         }
     }
 }

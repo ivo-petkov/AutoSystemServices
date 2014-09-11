@@ -15,6 +15,7 @@ using AutoSystem.Models;
 using AutoSystem.Services.Models;
 using Forum.WebApi.Attributes;
 using System.Web.Http.Description;
+using System.Globalization;
 
 
 namespace AutoSystem.Services.Controllers
@@ -25,6 +26,9 @@ namespace AutoSystem.Services.Controllers
         private PerformersRepository performersRepository;
         private CarsRepository carsRepository;
         private ClientsRepository clientsRepository;
+        private NotesRepository notesRepository;
+        private PartsRepository partsRepository;
+        private AttachmentsRepository attachmentsRepository;
 
         public RepairsController()
         {
@@ -33,6 +37,9 @@ namespace AutoSystem.Services.Controllers
             this.performersRepository = new PerformersRepository(context);
             this.carsRepository = new CarsRepository(context);
             this.clientsRepository = new ClientsRepository(context);
+            this.notesRepository = new NotesRepository(context);
+            this.partsRepository = new PartsRepository(context);
+            this.attachmentsRepository = new AttachmentsRepository(context);
         }
 
 
@@ -227,10 +234,27 @@ namespace AutoSystem.Services.Controllers
             }
 
             Car updatedCar = carsRepository.GetByRegisterPlate(editedRepairData.Car.RegisterPlate);
+
+            ICollection<Note> editedNotesData = new ICollection<Note>();
+            foreach (var note in editedRepairData.Notes)
+            {
+                Note newNote = new Note()
+                {
+                    NoteId = note.NoteId,
+                    Text = note.Text,
+                    RepairID = note.RepairId
+                };
+
+                editedNotesData.Add(newNote);
+            }
+            notesRepository.EditRepairNotes(editedNotesData, editedRepairData.RepairId);
+           
+           
+
             Repair updatedRepair = new Repair()
             {
                 RepairId = editedRepairData.RepairId,
-                Date = Convert.ToDateTime(editedRepairData.Date),
+                Date = DateTime.ParseExact(editedRepairData.Date, "dd/MM/yyyy HH:mm:ss tt", CultureInfo.InvariantCulture), //Convert.ToDateTime(editedRepairData.Date),
                 Status = editedRepairData.Status,
                 Milage = editedRepairData.Milage,
                 FianlePrice = editedRepairData.FinalPrice,
