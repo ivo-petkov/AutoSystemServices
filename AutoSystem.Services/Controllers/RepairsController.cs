@@ -68,6 +68,20 @@ namespace AutoSystem.Services.Controllers
                 repairNotes.Add(newNote);
             }
 
+            var repairParts = new List<PartsModel>();
+
+            foreach (var item in repair.Parts)
+            {
+                var newParts = new PartsModel()
+                {
+                    RepairId = item.RepairId,
+                    PartsId = item.PartsId,
+                    Text = item.Text,
+                    PriceInfo = item.PriceInfo
+                };
+                repairParts.Add(newParts);
+            }
+
             Car repairCar = repair.Car;
             Client carClient = repairCar.Client;
 
@@ -112,49 +126,7 @@ namespace AutoSystem.Services.Controllers
             };
 
             return Request.CreateResponse(HttpStatusCode.OK, repairModel);
-        }
-
-        // api/repairs/add
-        [HttpPost]
-        [ActionName("add")]
-        public HttpResponseMessage Add([FromBody]Repair value,
-            [ValueProvider(typeof(HeaderValueProviderFactory<String>))] String sessionKey)
-        {
-            //check for empty properties (not needed)
-            
-            //check for already registered repair (not needed)
-
-            Performer performer = performersRepository.GetBySessionKey(sessionKey);
-            Car car = carsRepository.GetById(value.CarId);
-            Repair repairToAdd = new Repair()
-            {
-                Car = car,
-                Performer = performer,
-                Date = DateTime.Now,
-                Milage = value.Milage,
-                FianlePrice = value.FianlePrice,
-                Status = value.Status,
-
-            };
-
-            repairsRepository.Add(repairToAdd);
-
-
-            /// very questionable
-            var repairModel = new RepairModel()
-            {
-                RepairId = value.RepairId,
-                Date = value.Date.ToString(),
-                Milage = value.Milage,
-                FinalPrice = value.FianlePrice,
-                Status = value.Status,
-                PerformerId = performer.PerformerId,
-                CarId = car.CarId,
-            };
-
-
-            return Request.CreateResponse(HttpStatusCode.Created, repairModel);
-        }
+        }       
 
 
         // api/repairs/all
@@ -189,6 +161,112 @@ namespace AutoSystem.Services.Controllers
             return Request.CreateResponse(HttpStatusCode.BadRequest, "Invalid session key");
         }
 
+
+        // api/repairs/add
+        [HttpPost]
+        [ActionName("add")]
+        public HttpResponseMessage Add([ValueProvider(typeof(HeaderValueProviderFactory<String>))] String sessionKey,
+            [FromBody]RepairModel repair)
+        {
+
+            Performer performer = performersRepository.GetBySessionKey(sessionKey);
+            if (performer == null)
+            {
+                 return Request.CreateResponse(HttpStatusCode.BadRequest, "Invalid session key");
+            }
+            //check for empty properties (not needed)
+            //check for already registered repair (not needed)
+
+            CarModel car = repair.Car;
+
+            Car newCar = new Car()
+            {
+                Brand = car.Brand,
+                Model = car.Model,
+                RegisterPlate = car.RegisterPlate,
+                Telephone = car.Telephone,
+                Town = car.Town,
+                Year = car.Year,
+                Chassis = car.Chassis,
+                Engine = car.Engine,
+                EngineSize = car.EngineSize,
+                ClientId = car.ClientId,
+            };
+
+            Car existingCar = carsRepository.GetByRegisterPlate(newCar.RegisterPlate);
+            if (existingCar == null)
+            {
+                carsRepository.Add(newCar);
+            }
+            else
+            {
+                if (!carsRepository.EditCar(newCar, existingCar.CarId))
+                {
+                    return Request.CreateResponse(HttpStatusCode.BadRequest, "Could not edit existing car.");
+                }
+            }
+
+            //Creating repair's notes 
+            var repairNotes = new List<Note>();
+            if (repair.Notes != null)
+            {
+                foreach (var note in repair.Notes)
+                {
+                    Note newNote = new Note()
+                    {
+                        Text = note.Text
+                    };
+                    repairNotes.Add(newNote);
+                }
+            }
+            
+
+            //Creating repair's parts            
+            var repairParts = new List<Parts>();
+            if (repair.Parts != null)
+            {
+                foreach (var partsInfo in repair.Parts)
+                {
+                    Parts newParts = new Parts()
+                    {
+                        Text = partsInfo.Text,
+                        PriceInfo = partsInfo.PriceInfo
+                    };
+                    repairParts.Add(newParts);
+                }
+                
+            }           
+            
+            
+            Car repairCar = carsRepository.GetByRegisterPlate(repair.Car.RegisterPlate);
+
+            Repair repairToAdd = new Repair()
+            {
+                CarId = repairCar.CarId,
+                PerformerId = performer.PerformerId,
+                Date = DateTime.Now,
+                Milage = repair.Milage,
+                FianlePrice = repair.FinalPrice,
+                PerformerPrice = repair.PerformerPrice,
+                IsEditable = repair.IsEditable,
+                Status = repair.Status
+            };
+
+            if (repairNotes != null && repairNotes.Count != 0)
+	        {
+                repairToAdd.Notes = repairNotes;
+	        }
+            if (repairParts != null && repairParts.Count != 0)
+            {
+                repairToAdd.Parts = repairParts;
+            }
+
+            repairsRepository.Add(repairToAdd);       
+            return Request.CreateResponse(HttpStatusCode.Created, "Repair Created.");
+        }
+
+
+
         //api/repairs/edit
         [HttpPost]
         [ActionName("edit")]
@@ -204,7 +282,7 @@ namespace AutoSystem.Services.Controllers
 
             var uneditedCar = this.carsRepository.GetById(editedRepairData.Car.CarId);
             CarModel editedCarData = editedRepairData.Car;
-            //editedCarData.ClientId = editedRepairData.ClientId;
+
             Car newCar = new Car()
             {
                 Brand = editedCarData.Brand,
