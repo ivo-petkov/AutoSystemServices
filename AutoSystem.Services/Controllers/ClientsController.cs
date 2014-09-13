@@ -19,11 +19,13 @@ namespace AutoSystem.Services.Controllers
     public class ClientsController : ApiController
     {
         private ClientsRepository clientsRepository;
+        private PerformersRepository performersRepository;
 
         public ClientsController()
         {
             var context = new AutoSystemContext();
             this.clientsRepository = new ClientsRepository(context);
+            this.performersRepository = new PerformersRepository(context);
         }
 
         // api/clients/add
@@ -69,6 +71,39 @@ namespace AutoSystem.Services.Controllers
             };
 
             return model;
+        }
+
+
+        // api/clients/getcars?id=23
+        [HttpGet]
+        [ActionName("getcars")]
+        public HttpResponseMessage GetCars(int clientId,
+            [ValueProvider(typeof(HeaderValueProviderFactory<String>))] String sessionKey)
+        {
+            var clientCars = new List<CarModel>();
+            var client = this.clientsRepository.Get(clientId);
+            var performer = this.performersRepository.GetBySessionKey(sessionKey);
+            var cars = client.Cars.Where(car => car.Repairs.Any(repair => repair.PerformerId == performer.PerformerId));
+
+            foreach (var car in cars)
+            {
+                CarModel newCar = new CarModel()
+                {
+                    CarId = car.CarId,
+                    Brand = car.Brand,
+                    Model = car.Model,
+                    Year = car.Year,
+                    Telephone = car.Telephone,
+                    Town = car.Town,
+                    Engine = car.Engine,
+                    EngineSize = car.EngineSize,
+                    Chassis = car.Chassis,
+                    RegisterPlate = car.RegisterPlate
+                };
+                clientCars.Add(newCar);                
+            }
+
+            return Request.CreateResponse(HttpStatusCode.Created, clientCars);
         }
 	}
 }
