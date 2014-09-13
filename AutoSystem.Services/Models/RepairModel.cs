@@ -20,8 +20,8 @@ namespace AutoSystem.Services.Models
         public CarModel Car { get; set; }
         public PerformerModel Performer { get; set; }
         public ICollection<NoteModel> Notes { get; set; }
-        public ICollection<Attachment> Attachments { get; set; }
-        public ICollection<Parts> Parts { get; set; }
+        public ICollection<AttachmentModel> Attachments { get; set; }
+        public ICollection<PartsModel> Parts { get; set; }
         //public int ClientId { get; set; }
     }
 }

@@ -40,3 +40,17 @@ C:\Users\ivopp_000\Documents\GitHub\AutoSystemServices\AutoSystem.Repositories\b
 C:\Users\ivopp_000\Documents\GitHub\AutoSystemServices\AutoSystem.Repositories\obj\Debug\AutoSystem.Repositories.csprojResolveAssemblyReference.cache
 C:\Users\ivopp_000\Documents\GitHub\AutoSystemServices\AutoSystem.Repositories\obj\Debug\AutoSystem.Repositories.dll
 C:\Users\ivopp_000\Documents\GitHub\AutoSystemServices\AutoSystem.Repositories\obj\Debug\AutoSystem.Repositories.pdb
+C:\Users\ivopp_000\Desktop\AutoSYSTEMLOCALCOPY\AutoSystemServices-master\AutoSystem.Repositories\bin\Debug\AutoSystem.Repositories.dll.config
+C:\Users\ivopp_000\Desktop\AutoSYSTEMLOCALCOPY\AutoSystemServices-master\AutoSystem.Repositories\bin\Debug\AutoSystem.Repositories.dll
+C:\Users\ivopp_000\Desktop\AutoSYSTEMLOCALCOPY\AutoSystemServices-master\AutoSystem.Repositories\bin\Debug\AutoSystem.Repositories.pdb
+C:\Users\ivopp_000\Desktop\AutoSYSTEMLOCALCOPY\AutoSystemServices-master\AutoSystem.Repositories\bin\Debug\AutoSystem.DataLayer.dll
+C:\Users\ivopp_000\Desktop\AutoSYSTEMLOCALCOPY\AutoSystemServices-master\AutoSystem.Repositories\bin\Debug\AutoSystem.Models.dll
+C:\Users\ivopp_000\Desktop\AutoSYSTEMLOCALCOPY\AutoSystemServices-master\AutoSystem.Repositories\bin\Debug\EntityFramework.dll
+C:\Users\ivopp_000\Desktop\AutoSYSTEMLOCALCOPY\AutoSystemServices-master\AutoSystem.Repositories\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\ivopp_000\Desktop\AutoSYSTEMLOCALCOPY\AutoSystemServices-master\AutoSystem.Repositories\bin\Debug\AutoSystem.DataLayer.pdb
+C:\Users\ivopp_000\Desktop\AutoSYSTEMLOCALCOPY\AutoSystemServices-master\AutoSystem.Repositories\bin\Debug\AutoSystem.Models.pdb
+C:\Users\ivopp_000\Desktop\AutoSYSTEMLOCALCOPY\AutoSystemServices-master\AutoSystem.Repositories\bin\Debug\EntityFramework.xml
+C:\Users\ivopp_000\Desktop\AutoSYSTEMLOCALCOPY\AutoSystemServices-master\AutoSystem.Repositories\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\ivopp_000\Desktop\AutoSYSTEMLOCALCOPY\AutoSystemServices-master\AutoSystem.Repositories\obj\Debug\AutoSystem.Repositories.csprojResolveAssemblyReference.cache
+C:\Users\ivopp_000\Desktop\AutoSYSTEMLOCALCOPY\AutoSystemServices-master\AutoSystem.Repositories\obj\Debug\AutoSystem.Repositories.dll
+C:\Users\ivopp_000\Desktop\AutoSYSTEMLOCALCOPY\AutoSystemServices-master\AutoSystem.Repositories\obj\Debug\AutoSystem.Repositories.pdb

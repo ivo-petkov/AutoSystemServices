@@ -40,3 +40,17 @@ C:\Users\ivopp_000\Documents\GitHub\AutoSystemServices\AutoSystem.Client\bin\Deb
 C:\Users\ivopp_000\Documents\GitHub\AutoSystemServices\AutoSystem.Client\obj\Debug\AutoSystem.Client.csprojResolveAssemblyReference.cache
 C:\Users\ivopp_000\Documents\GitHub\AutoSystemServices\AutoSystem.Client\obj\Debug\AutoSystem.Client.exe
 C:\Users\ivopp_000\Documents\GitHub\AutoSystemServices\AutoSystem.Client\obj\Debug\AutoSystem.Client.pdb
+C:\Users\ivopp_000\Desktop\AutoSYSTEMLOCALCOPY\AutoSystemServices-master\AutoSystem.Client\bin\Debug\AutoSystem.Client.exe.config
+C:\Users\ivopp_000\Desktop\AutoSYSTEMLOCALCOPY\AutoSystemServices-master\AutoSystem.Client\bin\Debug\AutoSystem.Client.exe
+C:\Users\ivopp_000\Desktop\AutoSYSTEMLOCALCOPY\AutoSystemServices-master\AutoSystem.Client\bin\Debug\AutoSystem.Client.pdb
+C:\Users\ivopp_000\Desktop\AutoSYSTEMLOCALCOPY\AutoSystemServices-master\AutoSystem.Client\bin\Debug\AutoSystem.DataLayer.dll
+C:\Users\ivopp_000\Desktop\AutoSYSTEMLOCALCOPY\AutoSystemServices-master\AutoSystem.Client\bin\Debug\AutoSystem.Models.dll
+C:\Users\ivopp_000\Desktop\AutoSYSTEMLOCALCOPY\AutoSystemServices-master\AutoSystem.Client\bin\Debug\EntityFramework.dll
+C:\Users\ivopp_000\Desktop\AutoSYSTEMLOCALCOPY\AutoSystemServices-master\AutoSystem.Client\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\ivopp_000\Desktop\AutoSYSTEMLOCALCOPY\AutoSystemServices-master\AutoSystem.Client\bin\Debug\AutoSystem.DataLayer.pdb
+C:\Users\ivopp_000\Desktop\AutoSYSTEMLOCALCOPY\AutoSystemServices-master\AutoSystem.Client\bin\Debug\AutoSystem.Models.pdb
+C:\Users\ivopp_000\Desktop\AutoSYSTEMLOCALCOPY\AutoSystemServices-master\AutoSystem.Client\bin\Debug\EntityFramework.xml
+C:\Users\ivopp_000\Desktop\AutoSYSTEMLOCALCOPY\AutoSystemServices-master\AutoSystem.Client\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\ivopp_000\Desktop\AutoSYSTEMLOCALCOPY\AutoSystemServices-master\AutoSystem.Client\obj\Debug\AutoSystem.Client.csprojResolveAssemblyReference.cache
+C:\Users\ivopp_000\Desktop\AutoSYSTEMLOCALCOPY\AutoSystemServices-master\AutoSystem.Client\obj\Debug\AutoSystem.Client.exe
+C:\Users\ivopp_000\Desktop\AutoSYSTEMLOCALCOPY\AutoSystemServices-master\AutoSystem.Client\obj\Debug\AutoSystem.Client.pdb

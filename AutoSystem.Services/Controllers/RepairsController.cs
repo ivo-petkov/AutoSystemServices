@@ -121,8 +121,8 @@ namespace AutoSystem.Services.Controllers
                 Car = carModel,
                 PerformerId = repair.PerformerId,
                 Notes = repairNotes,
-                Parts = repair.Parts,
-                Attachments = repair.Attachments
+                Parts = repairParts,
+                //Attachments = repair.Attachments
             };
 
             return Request.CreateResponse(HttpStatusCode.OK, repairModel);
