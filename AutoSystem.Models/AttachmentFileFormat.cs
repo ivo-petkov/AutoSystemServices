@@ -4,11 +4,11 @@ namespace AutoSystem.Models
 {   
     public enum AttachmentFileFormat
     {
-        Jpg = 0,
-        Png = 1,
-        Bmp = 2,
-        Pdf = 3,
-        Docx = 4,
-        Other = 5
+        jpg = 0,
+        png = 1,
+        bmp = 2,
+        pdf = 3,
+        docx = 4,
+        other = 5
     }
 }

@@ -45,3 +45,4 @@ C:\Users\ivopp_000\Desktop\AutoSYSTEMLOCALCOPY\AutoSystemServices-master\AutoSys
 C:\Users\ivopp_000\Desktop\AutoSYSTEMLOCALCOPY\AutoSystemServices-master\AutoSystem.DataLayer\bin\Debug\EntityFramework.SqlServer.xml
 C:\Users\ivopp_000\Desktop\AutoSYSTEMLOCALCOPY\AutoSystemServices-master\AutoSystem.DataLayer\obj\Debug\AutoSystem.DataLayer.dll
 C:\Users\ivopp_000\Desktop\AutoSYSTEMLOCALCOPY\AutoSystemServices-master\AutoSystem.DataLayer\obj\Debug\AutoSystem.DataLayer.pdb
+C:\Users\ivopp_000\Desktop\AutoSYSTEMLOCALCOPY\AutoSystemServices-master\AutoSystem.DataLayer\obj\Debug\AutoSystem.DataLayer.csprojResolveAssemblyReference.cache

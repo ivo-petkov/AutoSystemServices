@@ -187,20 +187,14 @@ namespace AutoSystem.Services.Controllers
             if (performer != null)
             {
                 var clients = performer.Clients;
-                var simpleClients = new List<ClientModel>();
 
-                foreach (var item in clients)
+                IEnumerable<ClientModel> simpleClients = clients.Select(client => new ClientModel
                 {
-                    var newCliet = new ClientModel()
-                    {
-                        ClientId = item.ClientId,
-                        Name = item.Name,
-                        Address = item.Address,
-                        Telephone = item.Telephone
-                    };
-
-                    simpleClients.Add(newCliet);
-                }
+                    ClientId = client.ClientId,
+                    Name = client.Name,
+                    Address = client.Address,
+                    Telephone = client.Telephone
+                });
 
                 return Request.CreateResponse(HttpStatusCode.OK, simpleClients);
             }

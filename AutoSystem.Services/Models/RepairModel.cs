@@ -19,9 +19,9 @@ namespace AutoSystem.Services.Models
         public int CarId { get; set; }
         public CarModel Car { get; set; }
         public PerformerModel Performer { get; set; }
-        public ICollection<NoteModel> Notes { get; set; }
-        public ICollection<AttachmentModel> Attachments { get; set; }
-        public ICollection<PartsModel> Parts { get; set; }
+        public IEnumerable<NoteModel> Notes { get; set; }
+        public IEnumerable<AttachmentModel> Attachments { get; set; }
+        public IEnumerable<PartsModel> Parts { get; set; }
         //public int ClientId { get; set; }
     }
 }

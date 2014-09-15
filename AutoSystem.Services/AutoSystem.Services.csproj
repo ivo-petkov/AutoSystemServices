@@ -164,6 +164,7 @@
     <Compile Include="Models\CarModel.cs" />
     <Compile Include="Models\ClientModel.cs" />
     <Compile Include="Models\EditPerformerModel.cs" />
+    <Compile Include="Models\FilterQuery.cs" />
     <Compile Include="Models\NoteModel.cs" />
     <Compile Include="Models\PartsModel.cs" />
     <Compile Include="Models\PerformerModel.cs" />
@@ -198,7 +199,9 @@
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>

@@ -80,28 +80,24 @@ namespace AutoSystem.Services.Controllers
         public HttpResponseMessage GetCars(int clientId,
             [ValueProvider(typeof(HeaderValueProviderFactory<String>))] String sessionKey)
         {
-            var clientCars = new List<CarModel>();
+            //var clientCars = new List<CarModel>();
             var client = this.clientsRepository.Get(clientId);
             var performer = this.performersRepository.GetBySessionKey(sessionKey);
             var cars = client.Cars.Where(car => car.Repairs.Any(repair => repair.PerformerId == performer.PerformerId));
 
-            foreach (var car in cars)
+            IEnumerable<CarModel> clientCars = cars.Select(c => new CarModel
             {
-                CarModel newCar = new CarModel()
-                {
-                    CarId = car.CarId,
-                    Brand = car.Brand,
-                    Model = car.Model,
-                    Year = car.Year,
-                    Telephone = car.Telephone,
-                    Town = car.Town,
-                    Engine = car.Engine,
-                    EngineSize = car.EngineSize,
-                    Chassis = car.Chassis,
-                    RegisterPlate = car.RegisterPlate
-                };
-                clientCars.Add(newCar);                
-            }
+                CarId = c.CarId,
+                Brand = c.Brand,
+                Model = c.Model,
+                Year = c.Year,
+                Telephone = c.Telephone,
+                Town = c.Town,
+                Engine = c.Engine,
+                EngineSize = c.EngineSize,
+                Chassis = c.Chassis,
+                RegisterPlate = c.RegisterPlate
+            });
 
             return Request.CreateResponse(HttpStatusCode.Created, clientCars);
         }

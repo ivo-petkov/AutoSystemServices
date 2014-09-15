@@ -55,32 +55,30 @@ namespace AutoSystem.Services.Controllers
                 return Request.CreateResponse(HttpStatusCode.BadRequest, "Invalid RepairId");
             }
 
-            var repairNotes = new List<NoteModel>();
-
-            foreach (var item in repair.Notes)
+            IEnumerable<NoteModel> repairNotes = repair.Notes.Select(n => new NoteModel
             {
-                var newNote = new NoteModel() 
-                {
-                    RepairId = item.RepairID,
-                    Text = item.Text,
-                    NoteId = item.NoteId
-                };
-                repairNotes.Add(newNote);
-            }
+                RepairId = n.RepairID,
+                Text = n.Text,
+                NoteId = n.NoteId
+            });
 
-            var repairParts = new List<PartsModel>();
-
-            foreach (var item in repair.Parts)
+            IEnumerable<PartsModel> repairParts = repair.Parts.Select(p => new PartsModel
             {
-                var newParts = new PartsModel()
-                {
-                    RepairId = item.RepairId,
-                    PartsId = item.PartsId,
-                    Text = item.Text,
-                    PriceInfo = item.PriceInfo
-                };
-                repairParts.Add(newParts);
-            }
+                RepairId = p.RepairId,
+                PartsId = p.PartsId,
+                Text = p.Text,
+                PriceInfo = p.PriceInfo
+            });
+
+            IEnumerable<AttachmentModel> repairAttachments = repair.Attachments.Select(a => new AttachmentModel
+            {
+                RepairId = a.RepairId,
+                AttachmentId = a.AttachmentId,
+                Name = a.Name,
+                Data = a.Data,
+                DocumentType = a.DocumentType,
+                FileFormat = a.FileFormat
+            });
 
             Car repairCar = repair.Car;
             Client carClient = repairCar.Client;
@@ -122,11 +120,52 @@ namespace AutoSystem.Services.Controllers
                 PerformerId = repair.PerformerId,
                 Notes = repairNotes,
                 Parts = repairParts,
-                //Attachments = repair.Attachments
+                Attachments = repairAttachments
             };
 
             return Request.CreateResponse(HttpStatusCode.OK, repairModel);
-        }       
+        }
+
+
+        //api/repairs/filter?RegisterPlate=ВР8000АХ&Brand=Ford
+        [HttpGet]
+        [ActionName("filter")]
+        public IHttpActionResult GetByFilter(
+            [ValueProvider(typeof(HeaderValueProviderFactory<String>))] String sessionKey,
+            [FromUri]FilterQuery filter)
+        {
+            Performer performer = performersRepository.GetBySessionKey(sessionKey);
+            if (performer == null)
+            {
+                return BadRequest("Invalid session key");
+            }
+            
+            DateTime? formatedStartDate = DateTime.ParseExact(filter.StartDate, "dd-MM-yyyy", System.Globalization.CultureInfo.InvariantCulture);
+            DateTime? formatedEndtDate = DateTime.ParseExact(filter.EndDate, "dd-MM-yyyy", System.Globalization.CultureInfo.InvariantCulture);
+            IEnumerable<Repair> performerRepairs = performer.Repairs;    
+        
+            var filteredRepairs = performerRepairs.Where(r => r.RepairId != null 
+                && (filter.RegisterPlate != null ? r.Car.RegisterPlate.ToLower().Contains(filter.RegisterPlate.ToLower()) : true)
+                && (filter.Brand != null ? r.Car.Brand == filter.Brand : true)
+                && (filter.ClientId != null ? r.Car.ClientId == filter.ClientId : true)
+                && (filter.Status != null ? (int)(r.Status) == filter.Status : true)
+                && (formatedStartDate != null ? r.Date.Year >= formatedStartDate.Value.Year && r.Date.Month >= formatedStartDate.Value.Month && r.Date.Day >= formatedStartDate.Value.Day : true)
+                && (formatedEndtDate != null ? r.Date.Year <= formatedEndtDate.Value.Year && r.Date.Month <= formatedEndtDate.Value.Month && r.Date.Day <= formatedEndtDate.Value.Day : true)
+                );
+              
+
+            IEnumerable<SimpleRepairModel> resposeRepairs = filteredRepairs.Select(r => new SimpleRepairModel
+                                                                                            {
+                                                                                                RepairId = r.RepairId,
+                                                                                                ClientName = r.Car.Client.Name,
+                                                                                                Status = r.Status,
+                                                                                                Date = r.Date.ToString("dd/MM/yy HH:mm")
+                                                                                            });
+            var orederedRepairs = resposeRepairs.OrderByDescending(r => r.RepairId).ToList();
+
+            return Ok(orederedRepairs);
+        }
+
 
 
         // api/repairs/all
@@ -140,22 +179,17 @@ namespace AutoSystem.Services.Controllers
             if (performer != null)
             {
                 var repairs = performer.Repairs;
-                var simpleRepairs = new List<SimpleRepairModel>();
 
-                foreach (var item in repairs)
+                IEnumerable<SimpleRepairModel> simpleRepairs = repairs.Select(r => new SimpleRepairModel
                 {
-                    var newRepair = new SimpleRepairModel()
-                    {
-                        RepairId = item.RepairId,
-                        Status = item.Status,
-                        Date = item.Date.ToString(),
-                        ClientName = item.Car.Client.Name
-                    };
+                    RepairId = r.RepairId,
+                    ClientName = r.Car.Client.Name,
+                    Status = r.Status,
+                    Date = r.Date.ToString("dd/MM/yy HH:mm")
+                });
+                var orederedRepairs = simpleRepairs.OrderByDescending(r => r.RepairId).ToList();
 
-                    simpleRepairs.Add(newRepair);
-                }
-
-                return Request.CreateResponse(HttpStatusCode.OK, simpleRepairs);
+                return Request.CreateResponse(HttpStatusCode.OK, orederedRepairs);
             }
 
             return Request.CreateResponse(HttpStatusCode.BadRequest, "Invalid session key");
@@ -207,37 +241,28 @@ namespace AutoSystem.Services.Controllers
             }
 
             //Creating repair's notes 
-            var repairNotes = new List<Note>();
-            if (repair.Notes != null)
+            IEnumerable<Note> repairNotes = repair.Notes.Select(n => new Note
             {
-                foreach (var note in repair.Notes)
-                {
-                    Note newNote = new Note()
-                    {
-                        Text = note.Text
-                    };
-                    repairNotes.Add(newNote);
-                }
-            }
-            
+                Text = n.Text
+            });            
 
-            //Creating repair's parts            
-            var repairParts = new List<Parts>();
-            if (repair.Parts != null)
+            //Creating repair's parts  
+            IEnumerable<Parts> repairParts = repair.Parts.Select(p => new Parts
             {
-                foreach (var partsInfo in repair.Parts)
-                {
-                    Parts newParts = new Parts()
-                    {
-                        Text = partsInfo.Text,
-                        PriceInfo = partsInfo.PriceInfo
-                    };
-                    repairParts.Add(newParts);
-                }
-                
-            }           
+                Text = p.Text,
+                PriceInfo = p.PriceInfo
+            });      
             
-            
+            //Creating repair's attachments
+            IEnumerable<Attachment> repairAttachments = repair.Attachments.Select(a => new Attachment
+            {
+                Name = a.Name,
+                Data = a.Data,
+                DocumentType = a.DocumentType,
+                FileFormat = a.FileFormat
+            });
+
+
             Car repairCar = carsRepository.GetByRegisterPlate(repair.Car.RegisterPlate);
 
             Repair repairToAdd = new Repair()
@@ -252,13 +277,17 @@ namespace AutoSystem.Services.Controllers
                 Status = repair.Status
             };
 
-            if (repairNotes != null && repairNotes.Count != 0)
+            if (repairNotes != null)
 	        {
-                repairToAdd.Notes = repairNotes;
+                repairToAdd.Notes = repairNotes.ToList();
 	        }
-            if (repairParts != null && repairParts.Count != 0)
+            if (repairParts != null)
             {
-                repairToAdd.Parts = repairParts;
+                repairToAdd.Parts = repairParts.ToList();
+            }
+            if (repairAttachments != null)
+            {
+                repairToAdd.Attachments = repairAttachments.ToList();
             }
 
             repairsRepository.Add(repairToAdd);       
@@ -315,7 +344,7 @@ namespace AutoSystem.Services.Controllers
 
             EditNotes(editedRepairData);
             EditParts(editedRepairData);
-            //EditAtachments(editedRepairData);
+            EditAtachments(editedRepairData);
 
 
 
@@ -345,55 +374,42 @@ namespace AutoSystem.Services.Controllers
 
         private void EditNotes(RepairModel editedRepairData)
         {
-            List<Note> editedNotesData = new List<Note>();
-            foreach (var note in editedRepairData.Notes)
+            IEnumerable<Note> editedNotesData = editedRepairData.Notes.Select(n => new Note
             {
-                Note newNote = new Note()
-                {
-                    NoteId = note.NoteId,
-                    Text = note.Text,
-                    RepairID = note.RepairId
-                };
+                NoteId = n.NoteId,
+                Text = n.Text,
+                RepairID = n.RepairId
+            });
 
-                editedNotesData.Add(newNote);
-            }
-            notesRepository.EditRepairNotes(editedNotesData, editedRepairData.RepairId);
+            notesRepository.EditRepairNotes(editedNotesData.ToList(), editedRepairData.RepairId);
         }
 
         private void EditParts(RepairModel editedRepairData)
         {
-            List<Parts> editedPartsData = new List<Parts>();
-            foreach (var partsInfo in editedRepairData.Parts)
+            IEnumerable<Parts> editedPartsData = editedRepairData.Parts.Select(p => new Parts
             {
-                Parts newParts = new Parts()
-                {
-                    PartsId = partsInfo.PartsId,
-                    Text = partsInfo.Text,
-                    PriceInfo = partsInfo.PriceInfo,
-                    RepairId = partsInfo.RepairId                     
-                };
+                PartsId = p.PartsId,
+                Text = p.Text,
+                PriceInfo = p.PriceInfo,
+                RepairId = p.RepairId
+            });
 
-                editedPartsData.Add(newParts);
-            }
-            partsRepository.EditRepairParts(editedPartsData, editedRepairData.RepairId);
+            partsRepository.EditRepairParts(editedPartsData.ToList(), editedRepairData.RepairId);
         }
 
-        //private void EditAtachments(RepairModel editedRepairData)
-        //{
-        //    List<Note> editedNotesData = new List<Note>();
-        //    foreach (var note in editedRepairData.Notes)
-        //    {
-        //        Note newNote = new Note()
-        //        {
-        //            NoteId = note.NoteId,
-        //            Text = note.Text,
-        //            RepairID = note.RepairId
-        //        };
+        private void EditAtachments(RepairModel editedRepairData)
+        {
+            IEnumerable<Attachment> editedAttachmentsData = editedRepairData.Attachments.Select(a => new Attachment
+            {
+                AttachmentId = a.AttachmentId,
+                RepairId = a.RepairId,
+                Name = a.Name,
+                Data = a.Data,
+                DocumentType = a.DocumentType,
+                FileFormat = a.FileFormat
+            });
 
-        //        editedNotesData.Add(newNote);
-        //    }
-        //    notesRepository.EditRepairNotes(editedNotesData, editedRepairData.RepairId);
-        //}
-        
+            attachmentsRepository.EditRepairAttachment(editedAttachmentsData.ToList(), editedRepairData.RepairId);
+        }        
 	}
 }
