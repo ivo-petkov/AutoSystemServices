@@ -1,0 +1,12 @@
+C:\Users\ivopp_000\Desktop\AutoSYSTEMLOCALCOPY\AutoSystemServices-master\AutoSystem.DataLayer\bin\Release\AutoSystem.DataLayer.dll.config
+C:\Users\ivopp_000\Desktop\AutoSYSTEMLOCALCOPY\AutoSystemServices-master\AutoSystem.DataLayer\bin\Release\AutoSystem.DataLayer.dll
+C:\Users\ivopp_000\Desktop\AutoSYSTEMLOCALCOPY\AutoSystemServices-master\AutoSystem.DataLayer\bin\Release\AutoSystem.DataLayer.pdb
+C:\Users\ivopp_000\Desktop\AutoSYSTEMLOCALCOPY\AutoSystemServices-master\AutoSystem.DataLayer\bin\Release\AutoSystem.Models.dll
+C:\Users\ivopp_000\Desktop\AutoSYSTEMLOCALCOPY\AutoSystemServices-master\AutoSystem.DataLayer\bin\Release\EntityFramework.dll
+C:\Users\ivopp_000\Desktop\AutoSYSTEMLOCALCOPY\AutoSystemServices-master\AutoSystem.DataLayer\bin\Release\EntityFramework.SqlServer.dll
+C:\Users\ivopp_000\Desktop\AutoSYSTEMLOCALCOPY\AutoSystemServices-master\AutoSystem.DataLayer\bin\Release\AutoSystem.Models.pdb
+C:\Users\ivopp_000\Desktop\AutoSYSTEMLOCALCOPY\AutoSystemServices-master\AutoSystem.DataLayer\bin\Release\EntityFramework.xml
+C:\Users\ivopp_000\Desktop\AutoSYSTEMLOCALCOPY\AutoSystemServices-master\AutoSystem.DataLayer\bin\Release\EntityFramework.SqlServer.xml
+C:\Users\ivopp_000\Desktop\AutoSYSTEMLOCALCOPY\AutoSystemServices-master\AutoSystem.DataLayer\obj\Release\AutoSystem.DataLayer.csprojResolveAssemblyReference.cache
+C:\Users\ivopp_000\Desktop\AutoSYSTEMLOCALCOPY\AutoSystemServices-master\AutoSystem.DataLayer\obj\Release\AutoSystem.DataLayer.dll
+C:\Users\ivopp_000\Desktop\AutoSYSTEMLOCALCOPY\AutoSystemServices-master\AutoSystem.DataLayer\obj\Release\AutoSystem.DataLayer.pdb

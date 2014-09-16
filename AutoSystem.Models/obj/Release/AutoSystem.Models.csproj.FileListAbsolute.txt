@@ -1,0 +1,5 @@
+C:\Users\ivopp_000\Desktop\AutoSYSTEMLOCALCOPY\AutoSystemServices-master\AutoSystem.Models\bin\Release\AutoSystem.Models.dll
+C:\Users\ivopp_000\Desktop\AutoSYSTEMLOCALCOPY\AutoSystemServices-master\AutoSystem.Models\bin\Release\AutoSystem.Models.pdb
+C:\Users\ivopp_000\Desktop\AutoSYSTEMLOCALCOPY\AutoSystemServices-master\AutoSystem.Models\obj\Release\AutoSystem.Models.csprojResolveAssemblyReference.cache
+C:\Users\ivopp_000\Desktop\AutoSYSTEMLOCALCOPY\AutoSystemServices-master\AutoSystem.Models\obj\Release\AutoSystem.Models.dll
+C:\Users\ivopp_000\Desktop\AutoSYSTEMLOCALCOPY\AutoSystemServices-master\AutoSystem.Models\obj\Release\AutoSystem.Models.pdb

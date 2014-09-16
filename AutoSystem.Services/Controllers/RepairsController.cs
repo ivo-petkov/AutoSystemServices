@@ -299,14 +299,14 @@ namespace AutoSystem.Services.Controllers
         //api/repairs/edit
         [HttpPost]
         [ActionName("edit")]
-        public HttpResponseMessage EditPerformer([FromBody]RepairModel editedRepairData)
+        public IHttpActionResult EditPerformer([FromBody]RepairModel editedRepairData)
         {
             int repairId = editedRepairData.RepairId;
             var repair = repairsRepository.GetById(repairId);
 
             if (repair == null)
             {
-                return Request.CreateResponse(HttpStatusCode.BadRequest, "Invalid RepairId");
+                return BadRequest("Invalid RepairId");
             }
 
             var uneditedCar = this.carsRepository.GetById(editedRepairData.Car.CarId);
@@ -336,7 +336,7 @@ namespace AutoSystem.Services.Controllers
 
                 if (!carsRepository.EditCar(newCar, existingCar.CarId))
                 {
-                    return Request.CreateResponse(HttpStatusCode.BadRequest, "Could not edit car");
+                    return BadRequest("Could not edit car");
                 }
             }
 
@@ -366,9 +366,9 @@ namespace AutoSystem.Services.Controllers
 
             if (!repairsRepository.EditRepair(updatedRepair, editedRepairData.RepairId))
             {
-                return Request.CreateResponse(HttpStatusCode.BadRequest, "Could not edit repair");
+                return BadRequest("Could not edit repair");
             }
-            return Request.CreateResponse(HttpStatusCode.OK,"Repair Edited.");
+            return Ok("Repair Edited.");
 
         }
 
