@@ -47,7 +47,7 @@ namespace AutoSystem.Services
             config.Routes.MapHttpRoute(
                    name: "AttachmentsApi",
                    routeTemplate: "api/attachments/{action}/{id}",
-                   defaults: new { controller = "notes", id = RouteParameter.Optional }
+                   defaults: new { controller = "attachments", id = RouteParameter.Optional }
                );
 
             config.Routes.MapHttpRoute(

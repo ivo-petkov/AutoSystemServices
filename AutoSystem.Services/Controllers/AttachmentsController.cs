@@ -28,10 +28,10 @@ namespace AutoSystem.Services.Controllers
         }
 
 
-        // api/attachments/delete
+       // api/attachments/remove?id=2
         [HttpPost]
-        [ActionName("delete")]
-        public HttpResponseMessage Register([FromBody]int id)
+        [ActionName("remove")]
+        public HttpResponseMessage Remove([FromUri]int id)
         {
 
             if (attachmentsRepository.Get(id) == null)
