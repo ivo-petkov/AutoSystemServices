@@ -70,12 +70,11 @@ namespace AutoSystem.Services.Controllers
                 PriceInfo = p.PriceInfo
             });
 
-            IEnumerable<AttachmentModel> repairAttachments = repair.Attachments.Select(a => new AttachmentModel
+            IEnumerable<SimpleAttachmentModel> repairAttachments = repair.Attachments.Select(a => new SimpleAttachmentModel
             {
                 RepairId = a.RepairId,
                 AttachmentId = a.AttachmentId,
                 Name = a.Name,
-                Data = a.Data,
                 DocumentType = a.DocumentType,
                 FileFormat = a.FileFormat
             });
@@ -120,7 +119,7 @@ namespace AutoSystem.Services.Controllers
                 PerformerId = repair.PerformerId,
                 Notes = repairNotes,
                 Parts = repairParts,
-                Attachments = repairAttachments
+                SimpleAttachments = repairAttachments
             };
 
             return Request.CreateResponse(HttpStatusCode.OK, repairModel);

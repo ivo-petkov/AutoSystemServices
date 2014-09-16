@@ -36,7 +36,7 @@ namespace AutoSystem.Repositories
             }
 
             attachment.Name = value.Name;
-            attachment.Data = value.Data;
+            attachment.Data = value.Data == null ? attachment.Data : value.Data;
             attachment.DocumentType = value.DocumentType;
             attachment.FileFormat = value.FileFormat;            
 

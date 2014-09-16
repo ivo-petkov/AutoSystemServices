@@ -20,6 +20,7 @@ namespace AutoSystem.Services.Models
         public CarModel Car { get; set; }
         public PerformerModel Performer { get; set; }
         public IEnumerable<NoteModel> Notes { get; set; }
+        public IEnumerable<SimpleAttachmentModel> SimpleAttachments { get; set; }
         public IEnumerable<AttachmentModel> Attachments { get; set; }
         public IEnumerable<PartsModel> Parts { get; set; }
         //public int ClientId { get; set; }

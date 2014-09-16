@@ -41,7 +41,7 @@ namespace AutoSystem.Repositories
             repair.Date = (updatedRepair.Date != null) ? updatedRepair.Date : repair.Date;
             //repair.Notes = (updatedRepair.Notes != null) ? updatedRepair.Notes : repair.Notes;
             //repair.Parts = (updatedRepair.Parts != null) ? updatedRepair.Parts : repair.Parts;
-            //repair.Attachments = (updatedRepair.Attachments != null) ? updatedRepair.Attachments : repair.Attachments;
+            //repair.SimpleAttachments = (updatedRepair.SimpleAttachments != null) ? updatedRepair.SimpleAttachments : repair.SimpleAttachments;
 
             dbContext.SaveChanges();
             return true;
