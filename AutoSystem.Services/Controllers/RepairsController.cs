@@ -138,9 +138,21 @@ namespace AutoSystem.Services.Controllers
             {
                 return BadRequest("Invalid session key");
             }
+
+
+            DateTime? formatedStartDate = new DateTime?();
+            DateTime? formatedEndtDate = new DateTime?();
+
+            if (filter.StartDate != null)
+            {
+                formatedStartDate = DateTime.ParseExact(filter.StartDate, "dd-MM-yyyy", System.Globalization.CultureInfo.InvariantCulture);
+            }
+            if (filter.EndDate != null)
+            {
+                formatedEndtDate = DateTime.ParseExact(filter.EndDate, "dd-MM-yyyy", System.Globalization.CultureInfo.InvariantCulture);
+            }
+           
             
-            DateTime? formatedStartDate = DateTime.ParseExact(filter.StartDate, "dd-MM-yyyy", System.Globalization.CultureInfo.InvariantCulture);
-            DateTime? formatedEndtDate = DateTime.ParseExact(filter.EndDate, "dd-MM-yyyy", System.Globalization.CultureInfo.InvariantCulture);
             IEnumerable<Repair> performerRepairs = performer.Repairs;    
         
             var filteredRepairs = performerRepairs.Where(r => r.RepairId != null 
