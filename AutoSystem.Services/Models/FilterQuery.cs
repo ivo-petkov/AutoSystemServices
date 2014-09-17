@@ -12,6 +12,8 @@ namespace AutoSystem.Services.Models
         public int? ClientId { get; set; }
         public int? PerformerId { get; set; }
         public int? Status { get; set; }
+        public string Town { get; set; }
+        public string Model { get; set; }
         public string StartDate { get; set; }
         public string EndDate { get; set; }
     }

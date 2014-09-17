@@ -148,6 +148,8 @@ namespace AutoSystem.Services.Controllers
                 && (filter.Brand != null ? r.Car.Brand == filter.Brand : true)
                 && (filter.ClientId != null ? r.Car.ClientId == filter.ClientId : true)
                 && (filter.Status != null ? (int)(r.Status) == filter.Status : true)
+                && (filter.Town != null ? r.Car.Town == filter.Town : true)
+                && (filter.Model != null ? r.Car.Model == filter.Model : true)
                 && (formatedStartDate != null ? r.Date.Year >= formatedStartDate.Value.Year && r.Date.Month >= formatedStartDate.Value.Month && r.Date.Day >= formatedStartDate.Value.Day : true)
                 && (formatedEndtDate != null ? r.Date.Year <= formatedEndtDate.Value.Year && r.Date.Month <= formatedEndtDate.Value.Month && r.Date.Day <= formatedEndtDate.Value.Day : true)
                 );
