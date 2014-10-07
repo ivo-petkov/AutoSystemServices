@@ -14,7 +14,7 @@ namespace AutoSystem.Services.Models
         public int Milage { get; set; }
         public decimal FinalPrice { get; set; }
         public decimal PerformerPrice { get; set; }
-        public bool IsEditable { get; set; }
+        public AdminStatus AdminStatus { get; set; }
         public int PerformerId { get; set; }
         public int CarId { get; set; }
         public CarModel Car { get; set; }

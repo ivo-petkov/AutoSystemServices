@@ -33,8 +33,7 @@ namespace AutoSystem.Repositories
             car.Model = editedCarData.Model;
             car.Year = editedCarData.Year;
             car.RegisterPlate = editedCarData.RegisterPlate;
-            car.Telephone = editedCarData.Telephone;
-            car.Town = editedCarData.Town;
+            car.EngineNumber = editedCarData.EngineNumber;
             car.Chassis = editedCarData.Chassis;
             car.Engine = editedCarData.Engine;
             car.EngineSize = editedCarData.EngineSize;

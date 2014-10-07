@@ -45,7 +45,6 @@ namespace AutoSystem.Models
         {
             get { return clients; }
             set { clients = value; }
-        }
-        
+        }        
     }
 }

@@ -59,6 +59,7 @@ namespace AutoSystem.Services.Controllers
 
             var model = new AttachmentModel()
             {
+                AttachmentId = attachment.AttachmentId,
                 Name = attachment.Name,
                 Data = attachment.Data,
                 DocumentType = attachment.DocumentType,

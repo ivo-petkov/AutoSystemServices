@@ -9,6 +9,7 @@ namespace AutoSystem.Services.Models
     {
         public int PartsId { get; set; }
         public string Text { get; set; }
+        public string Provider { get; set; }
         public string PriceInfo { get; set; }
         public int RepairId { get; set; }   
 

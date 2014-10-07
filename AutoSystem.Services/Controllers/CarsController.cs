@@ -48,8 +48,7 @@ namespace AutoSystem.Services.Controllers
                 Brand = value.Brand,
                 Model = value.Model,
                 Year = value.Year,
-                Telephone = value.Telephone,
-                Town = value.Town,
+                EngineNumber = value.EngineNumber,
                 Engine = value.Engine,
                 EngineSize = value.EngineSize,
                 Chassis = value.Chassis,
@@ -76,13 +75,24 @@ namespace AutoSystem.Services.Controllers
                 Engine = car.Engine,
                 EngineSize = car.EngineSize,
                 Chassis = car.Chassis,
-                Telephone = car.Telephone,
-                Town = car.Town,
+                EngineNumber = car.EngineNumber,
                 Year = car.Year,
                 ClientId = car.ClientId
             };
 
             return model;
+        }
+
+        //api/cars?registeraPlate=CO6623AT
+        [HttpGet]
+        public bool CheckForExistingCar(string registerPlate)
+        {
+            var car = this.carsRepository.GetByRegisterPlate(registerPlate);
+            if (car == null)
+            {
+                return false;
+            }
+            return true;
         }
 	}
 }

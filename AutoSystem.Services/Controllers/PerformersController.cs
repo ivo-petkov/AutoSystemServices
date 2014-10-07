@@ -33,24 +33,21 @@ namespace AutoSystem.Services.Controllers
 
         [HttpGet]
         [ActionName("all")]
-        public HttpResponseMessage GetAllUsers(
-            [ValueProvider(typeof(HeaderValueProviderFactory<String>))] String sessionKey)
+        public HttpResponseMessage GetAllPerformers()
         {
-            var performer = performersRepository.GetBySessionKey(sessionKey);
-            if (performer != null)
-            {
-                var performers = performersRepository.All()
-                    .Select(u => new PerformerModel()
-                                     {
-                                         PerformerId = u.PerformerId,
-                                         Username = u.Username,
-                                         Name = u.Name,
-                                         Address = u.Address,
-                                         Telephone = u.Telephone
-                                     });
+           
+            var performers = performersRepository.All()
+                .Select(u => new PerformerModel()
+                                    {
+                                        PerformerId = u.PerformerId,
+                                        Username = u.Username,
+                                        Name = u.Name,
+                                        Address = u.Address,
+                                        Telephone = u.Telephone
+                                    });
 
-                return Request.CreateResponse(HttpStatusCode.OK, performers);
-            }
+            return Request.CreateResponse(HttpStatusCode.OK, performers);
+          
 
             return Request.CreateResponse(HttpStatusCode.BadRequest, "Invalid session key");
         }
@@ -94,7 +91,6 @@ namespace AutoSystem.Services.Controllers
 
             return Request.CreateResponse(HttpStatusCode.BadRequest, "Could not edit user");
         }
-
 
         // api/performers/register
         [HttpPost]
@@ -159,7 +155,6 @@ namespace AutoSystem.Services.Controllers
             }
         }
 
-
         //api/performers/logout
         [HttpGet]
         [ActionName("logout")]
@@ -217,8 +212,6 @@ namespace AutoSystem.Services.Controllers
             return Request.CreateResponse(HttpStatusCode.BadRequest, "Invalid performerId");
                         
         }
-
-
 
         private string GenerateSessionKey(int performerId)
         {

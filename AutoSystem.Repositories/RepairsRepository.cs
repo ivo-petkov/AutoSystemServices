@@ -21,7 +21,6 @@ namespace AutoSystem.Repositories
             return dbContext.Repairs.FirstOrDefault(u => u.RepairId == repairId);
         }
 
-
         public bool EditRepair(Repair updatedRepair, int repairId)
         {
             var repair = dbContext.Repairs.Find(repairId);
@@ -34,14 +33,11 @@ namespace AutoSystem.Repositories
             repair.CarId = (updatedRepair.CarId != null) ? updatedRepair.CarId : repair.CarId;
             repair.Status = (updatedRepair.Status != null) ? updatedRepair.Status : repair.Status;
             repair.Milage = (updatedRepair.Milage != null) ? updatedRepair.Milage : repair.Milage;
-            repair.PerformerPrice = (updatedRepair.PerformerPrice != null) ? updatedRepair.PerformerPrice : repair.PerformerPrice;
-            repair.FianlePrice = (updatedRepair.FianlePrice != null) ? updatedRepair.FianlePrice : repair.FianlePrice;
-            repair.IsEditable = (updatedRepair.IsEditable != null) ? updatedRepair.IsEditable : repair.IsEditable;
+            repair.CostPrice = (updatedRepair.CostPrice != null) ? updatedRepair.CostPrice : repair.CostPrice;
+            repair.FinalPrice = (updatedRepair.FinalPrice != null) ? updatedRepair.FinalPrice : repair.FinalPrice;
+            repair.AdminStatus = (updatedRepair.AdminStatus != null) ? updatedRepair.AdminStatus : repair.AdminStatus;
             repair.PerformerId = (updatedRepair.PerformerId != null) ? updatedRepair.PerformerId : repair.PerformerId;
             repair.Date = (updatedRepair.Date != null) ? updatedRepair.Date : repair.Date;
-            //repair.Notes = (updatedRepair.Notes != null) ? updatedRepair.Notes : repair.Notes;
-            //repair.Parts = (updatedRepair.Parts != null) ? updatedRepair.Parts : repair.Parts;
-            //repair.SimpleAttachments = (updatedRepair.SimpleAttachments != null) ? updatedRepair.SimpleAttachments : repair.SimpleAttachments;
 
             dbContext.SaveChanges();
             return true;

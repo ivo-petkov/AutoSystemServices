@@ -12,6 +12,8 @@ namespace AutoSystem.Models
 
         public string Text { get; set; }
 
+        public string Provider { get; set; }
+
         public string PriceInfo { get; set; }
 
         public int RepairId { get; set; }

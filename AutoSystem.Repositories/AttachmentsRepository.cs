@@ -2,51 +2,49 @@
 using AutoSystem.Models;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace AutoSystem.Repositories
 {
     public class AttachmentsRepository : EfRepository<Attachment>
     {
         private AutoSystemContext dbContext;
+        private RepairsRepository repairsRepository;
 
         public AttachmentsRepository(AutoSystemContext context)
             : base(context)
         {
             this.dbContext = context;
+            this.repairsRepository = new RepairsRepository(context);
         }
 
         public void EditRepairAttachment(ICollection<Attachment> editedAttachments, int repairId)
         {
+           List<Attachment> atts = new List<Attachment>(this.repairsRepository.Get(repairId).Attachments);
+           List<int> editedAttsIds = new List<int>();     
+
             foreach (var attachment in editedAttachments)
             {
-                if (!EditAttachment(attachment))
+                editedAttsIds.Add(attachment.AttachmentId);
+
+                var check = dbContext.Attachments.Find(attachment.AttachmentId);
+                if (check == null)
                 {
                     AddAttachment(attachment, repairId);
                 }
             }
-        }
 
-        public bool EditAttachment(Attachment value)
-        {
-            var attachment = dbContext.Attachments.Find(value.AttachmentId);
-
-            if (attachment == null)
+            foreach (var att in atts)
             {
-                return false;
+                if (!editedAttsIds.Contains(att.AttachmentId))
+                {
+                    this.Delete(att.AttachmentId);
+                }
             }
-
-            attachment.Name = value.Name;
-            attachment.Data = value.Data == null ? attachment.Data : value.Data;
-            attachment.DocumentType = value.DocumentType;
-            attachment.FileFormat = value.FileFormat;            
-
-            dbContext.SaveChanges();
-            return true;
-        }
+        }       
 
         public void AddAttachment(Attachment att, int repairId)
         {
-
             Attachment newAttachment = new Attachment()
             {
                 Name = att.Name,

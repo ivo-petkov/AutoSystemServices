@@ -56,6 +56,15 @@ namespace AutoSystem.Repositories
                 parts.PriceInfo = value.PriceInfo;
             }
 
+            if (String.IsNullOrWhiteSpace(value.Provider) || String.IsNullOrEmpty(value.Provider))
+            {
+                parts.Provider = null;
+            }
+            else
+            {
+                parts.Provider = value.Provider;
+            }
+
             dbContext.SaveChanges();
             return true;
         }
@@ -66,6 +75,7 @@ namespace AutoSystem.Repositories
             {
                 Text = parts.Text,
                 RepairId = repairId,
+                Provider = parts.Provider,
                 PriceInfo = parts.PriceInfo
             };
 

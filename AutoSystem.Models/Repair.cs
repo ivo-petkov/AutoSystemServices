@@ -26,11 +26,11 @@ namespace AutoSystem.Models
 
         public int Milage { get; set; }
 
-        public decimal FianlePrice { get; set; }
+        public decimal FinalPrice { get; set; }
 
-        public decimal PerformerPrice { get; set; }
+        public decimal CostPrice { get; set; }
 
-        public bool IsEditable { get; set; }
+        public AdminStatus AdminStatus { get; set; }
 
         public int CarId { get; set; }
         public virtual Car Car { get; set; }

@@ -67,6 +67,7 @@ namespace AutoSystem.Services.Controllers
                 RepairId = p.RepairId,
                 PartsId = p.PartsId,
                 Text = p.Text,
+                Provider = p.Provider,
                 PriceInfo = p.PriceInfo
             });
 
@@ -97,8 +98,7 @@ namespace AutoSystem.Services.Controllers
                 Model = repairCar.Model,
                 Brand = repairCar.Brand,
                 Year = repairCar.Year,
-                Town = repairCar.Town,
-                Telephone = repairCar.Telephone,
+                EngineNumber = repairCar.EngineNumber,
                 Engine = repairCar.Engine,
                 EngineSize = repairCar.EngineSize,
                 Chassis = repairCar.Chassis,
@@ -112,14 +112,15 @@ namespace AutoSystem.Services.Controllers
                 Status = repair.Status,
                 Date = repair.Date.ToString(),
                 Milage = repair.Milage,
-                FinalPrice = repair.FianlePrice,
-                PerformerPrice = repair.PerformerPrice,
+                FinalPrice = repair.FinalPrice,
+                PerformerPrice = repair.CostPrice,
                 CarId = repair.CarId,
                 Car = carModel,
                 PerformerId = repair.PerformerId,
                 Notes = repairNotes,
                 Parts = repairParts,
-                Attachments = repairAttachments
+                Attachments = repairAttachments,
+                AdminStatus = repair.AdminStatus
             };
 
             return Request.CreateResponse(HttpStatusCode.OK, repairModel);
@@ -141,7 +142,7 @@ namespace AutoSystem.Services.Controllers
 
 
             DateTime? formatedStartDate = new DateTime?();
-            DateTime? formatedEndtDate = new DateTime?();
+            DateTime? formatedEndDate = new DateTime?();
 
             if (filter.StartDate != null)
             {
@@ -149,7 +150,7 @@ namespace AutoSystem.Services.Controllers
             }
             if (filter.EndDate != null)
             {
-                formatedEndtDate = DateTime.ParseExact(filter.EndDate, "dd-MM-yyyy", System.Globalization.CultureInfo.InvariantCulture);
+                formatedEndDate = DateTime.ParseExact(filter.EndDate, "dd-MM-yyyy", System.Globalization.CultureInfo.InvariantCulture);
             }
            
             
@@ -160,10 +161,9 @@ namespace AutoSystem.Services.Controllers
                 && (filter.Brand != null ? r.Car.Brand == filter.Brand : true)
                 && (filter.ClientId != null ? r.Car.ClientId == filter.ClientId : true)
                 && (filter.Status != null ? (int)(r.Status) == filter.Status : true)
-                && (filter.Town != null ? r.Car.Town == filter.Town : true)
                 && (filter.Model != null ? r.Car.Model == filter.Model : true)
-                && (formatedStartDate != null ? r.Date.Year >= formatedStartDate.Value.Year && r.Date.Month >= formatedStartDate.Value.Month && r.Date.Day >= formatedStartDate.Value.Day : true)
-                && (formatedEndtDate != null ? r.Date.Year <= formatedEndtDate.Value.Year && r.Date.Month <= formatedEndtDate.Value.Month && r.Date.Day <= formatedEndtDate.Value.Day : true)
+                && (formatedStartDate != null ? DateTime.Compare(formatedStartDate.Value, r.Date) <= 0 : true)
+                && (formatedEndDate != null ? DateTime.Compare(formatedEndDate.Value, r.Date) >= 0 : true)
                 );
               
 
@@ -172,7 +172,11 @@ namespace AutoSystem.Services.Controllers
                                                                                                 RepairId = r.RepairId,
                                                                                                 ClientName = r.Car.Client.Name,
                                                                                                 Status = r.Status,
-                                                                                                Date = r.Date.ToString("dd/MM/yy HH:mm")
+                                                                                                Date = r.Date.ToString("dd/MM/yy"),
+                                                                                                PerformerName = r.Performer.Name,
+                                                                                                CarBrand = r.Car.Brand,
+                                                                                                CarModel = r.Car.Model,
+                                                                                                RegisterPlate = r.Car.RegisterPlate
                                                                                             });
             var orederedRepairs = resposeRepairs.OrderByDescending(r => r.RepairId).ToList();
 
@@ -198,9 +202,13 @@ namespace AutoSystem.Services.Controllers
                     RepairId = r.RepairId,
                     ClientName = r.Car.Client.Name,
                     Status = r.Status,
-                    Date = r.Date.ToString("dd/MM/yy HH:mm")
+                    Date = r.Date.ToString("dd/MM/yy"),
+                    PerformerName = r.Performer.Name,
+                    CarBrand = r.Car.Brand,
+                    CarModel = r.Car.Model,
+                    RegisterPlate = r.Car.RegisterPlate
                 });
-                var orederedRepairs = simpleRepairs.OrderByDescending(r => r.RepairId).ToList();
+                var orederedRepairs = simpleRepairs.OrderByDescending(r => r.RepairId).ToList().Take(50);
 
                 return Request.CreateResponse(HttpStatusCode.OK, orederedRepairs);
             }
@@ -231,8 +239,7 @@ namespace AutoSystem.Services.Controllers
                 Brand = car.Brand,
                 Model = car.Model,
                 RegisterPlate = car.RegisterPlate,
-                Telephone = car.Telephone,
-                Town = car.Town,
+                EngineNumber = car.EngineNumber,
                 Year = car.Year,
                 Chassis = car.Chassis,
                 Engine = car.Engine,
@@ -263,6 +270,7 @@ namespace AutoSystem.Services.Controllers
             IEnumerable<Parts> repairParts = repair.Parts.Select(p => new Parts
             {
                 Text = p.Text,
+                Provider = p.Provider,
                 PriceInfo = p.PriceInfo
             });      
             
@@ -284,9 +292,9 @@ namespace AutoSystem.Services.Controllers
                 PerformerId = performer.PerformerId,
                 Date = DateTime.Now,
                 Milage = repair.Milage,
-                FianlePrice = repair.FinalPrice,
-                PerformerPrice = repair.PerformerPrice,
-                IsEditable = repair.IsEditable,
+                FinalPrice = repair.FinalPrice,
+                CostPrice = repair.PerformerPrice,
+                AdminStatus = repair.AdminStatus,
                 Status = repair.Status
             };
 
@@ -330,8 +338,7 @@ namespace AutoSystem.Services.Controllers
                 Brand = editedCarData.Brand,
                 Model = editedCarData.Model,
                 RegisterPlate = editedCarData.RegisterPlate,
-                Telephone = editedCarData.Telephone,
-                Town = editedCarData.Town,
+                EngineNumber = editedCarData.EngineNumber,
                 Year = editedCarData.Year,
                 Chassis = editedCarData.Chassis,
                 Engine = editedCarData.Engine,
@@ -370,9 +377,9 @@ namespace AutoSystem.Services.Controllers
                 Date = noRoundtripDate,
                 Status = editedRepairData.Status,
                 Milage = editedRepairData.Milage,
-                FianlePrice = editedRepairData.FinalPrice,
-                PerformerPrice = editedRepairData.PerformerPrice,
-                IsEditable = editedRepairData.IsEditable,
+                FinalPrice = editedRepairData.FinalPrice,
+                CostPrice = editedRepairData.PerformerPrice,
+                AdminStatus = editedRepairData.AdminStatus,
                 CarId = updatedCar.CarId,
                 PerformerId = editedRepairData.PerformerId
             };
@@ -403,6 +410,7 @@ namespace AutoSystem.Services.Controllers
             {
                 PartsId = p.PartsId,
                 Text = p.Text,
+                Provider = p.Provider,
                 PriceInfo = p.PriceInfo,
                 RepairId = p.RepairId
             });

@@ -8,12 +8,13 @@ C:\Users\ivopp_000\Desktop\AutoSYSTEMLOCALCOPY\AutoSystem.Models\bin\Debug\AutoS
 C:\Users\ivopp_000\Desktop\AutoSYSTEMLOCALCOPY\AutoSystem.Models\obj\Debug\AutoSystem.Models.csprojResolveAssemblyReference.cache
 C:\Users\ivopp_000\Desktop\AutoSYSTEMLOCALCOPY\AutoSystem.Models\obj\Debug\AutoSystem.Models.dll
 C:\Users\ivopp_000\Desktop\AutoSYSTEMLOCALCOPY\AutoSystem.Models\obj\Debug\AutoSystem.Models.pdb
-C:\Users\ivopp_000\Documents\GitHub\AutoSystemServices\AutoSystem.Models\bin\Debug\AutoSystem.Models.dll
-C:\Users\ivopp_000\Documents\GitHub\AutoSystemServices\AutoSystem.Models\bin\Debug\AutoSystem.Models.pdb
-C:\Users\ivopp_000\Documents\GitHub\AutoSystemServices\AutoSystem.Models\obj\Debug\AutoSystem.Models.dll
-C:\Users\ivopp_000\Documents\GitHub\AutoSystemServices\AutoSystem.Models\obj\Debug\AutoSystem.Models.pdb
 C:\Users\ivopp_000\Desktop\AutoSYSTEMLOCALCOPY\AutoSystemServices-master\AutoSystem.Models\bin\Debug\AutoSystem.Models.dll
 C:\Users\ivopp_000\Desktop\AutoSYSTEMLOCALCOPY\AutoSystemServices-master\AutoSystem.Models\bin\Debug\AutoSystem.Models.pdb
 C:\Users\ivopp_000\Desktop\AutoSYSTEMLOCALCOPY\AutoSystemServices-master\AutoSystem.Models\obj\Debug\AutoSystem.Models.csprojResolveAssemblyReference.cache
 C:\Users\ivopp_000\Desktop\AutoSYSTEMLOCALCOPY\AutoSystemServices-master\AutoSystem.Models\obj\Debug\AutoSystem.Models.dll
 C:\Users\ivopp_000\Desktop\AutoSYSTEMLOCALCOPY\AutoSystemServices-master\AutoSystem.Models\obj\Debug\AutoSystem.Models.pdb
+C:\Users\ivopp_000\Documents\GitHub\AutoSystemServices\AutoSystem.Models\bin\Debug\AutoSystem.Models.dll
+C:\Users\ivopp_000\Documents\GitHub\AutoSystemServices\AutoSystem.Models\bin\Debug\AutoSystem.Models.pdb
+C:\Users\ivopp_000\Documents\GitHub\AutoSystemServices\AutoSystem.Models\obj\Debug\AutoSystem.Models.csprojResolveAssemblyReference.cache
+C:\Users\ivopp_000\Documents\GitHub\AutoSystemServices\AutoSystem.Models\obj\Debug\AutoSystem.Models.dll
+C:\Users\ivopp_000\Documents\GitHub\AutoSystemServices\AutoSystem.Models\obj\Debug\AutoSystem.Models.pdb
