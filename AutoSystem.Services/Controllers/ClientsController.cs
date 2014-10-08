@@ -100,5 +100,23 @@ namespace AutoSystem.Services.Controllers
 
             return Request.CreateResponse(HttpStatusCode.Created, clientCars);
         }
+
+        // api/clients/all
+        [HttpGet]
+        [ActionName("all")]
+        public HttpResponseMessage GetAllClients()
+        {
+
+            var clients = clientsRepository.All()
+                .Select(u => new ClientModel()
+                {
+                    ClientId = u.ClientId,
+                    Name = u.Name,
+                    Address = u.Address,
+                    Telephone = u.Telephone
+                });
+
+            return Request.CreateResponse(HttpStatusCode.OK, clients);
+        }
 	}
 }

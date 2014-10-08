@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace AutoSystem.Services.Models
@@ -15,5 +16,6 @@ namespace AutoSystem.Services.Models
         public string Mol { get; set; }
         public string Telephone { get; set; }
         public string Address { get; set; }
+        public IEnumerable<ClientModel> Clients { get; set; }
     }
 }
