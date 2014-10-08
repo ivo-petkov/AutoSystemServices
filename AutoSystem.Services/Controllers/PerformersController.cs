@@ -35,21 +35,26 @@ namespace AutoSystem.Services.Controllers
         [ActionName("all")]
         public HttpResponseMessage GetAllPerformers()
         {
-           
+
             var performers = performersRepository.All()
                 .Select(u => new PerformerModel()
-                                    {
-                                        PerformerId = u.PerformerId,
-                                        Username = u.Username,
-                                        Name = u.Name,
-                                        Address = u.Address,
-                                        Telephone = u.Telephone
-                                    });
+                {
+                    PerformerId = u.PerformerId,
+                    Username = u.Username,
+                    Name = u.Name,
+                    Address = u.Address,
+                    Telephone = u.Telephone,
+                    Email = u.Email,
+                    Mol = u.Mol,
+                    Bulstat = u.Bulstat,
+                    Clients = u.Clients.Select(c => new ClientModel()
+                    {
+                        ClientId = c.ClientId,
+                        Name = c.Name
+                    })
+                });
 
             return Request.CreateResponse(HttpStatusCode.OK, performers);
-          
-
-            return Request.CreateResponse(HttpStatusCode.BadRequest, "Invalid session key");
         }
 
         [HttpPost]
