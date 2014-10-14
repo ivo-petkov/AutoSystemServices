@@ -12,5 +12,7 @@ namespace AutoSystem.Services.Models
         public string Telephone { get; set; }
         public string Address { get; set; }
         public IEnumerable<CarModel> Cars { get; set; }
+        public IEnumerable<PerformerModel> Performers { get; set; }
+
     }
 }

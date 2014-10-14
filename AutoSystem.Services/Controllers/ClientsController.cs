@@ -113,10 +113,86 @@ namespace AutoSystem.Services.Controllers
                     ClientId = u.ClientId,
                     Name = u.Name,
                     Address = u.Address,
-                    Telephone = u.Telephone
+                    Telephone = u.Telephone,
+                    Performers = u.Performers.Select(c => new PerformerModel()
+                    {
+                        PerformerId = c.PerformerId,
+                        Name = c.Name
+                    })
                 });
 
             return Request.CreateResponse(HttpStatusCode.OK, clients);
+        }
+
+
+        //api/performers/checkCars?id=23
+        [HttpGet]
+        [ActionName("checkCars")]
+        public HttpResponseMessage CheckForRepairs([FromUri]int id)
+        {
+
+            var client = clientsRepository.Get(id);
+            if (client == null)
+            {
+                return Request.CreateResponse(HttpStatusCode.BadRequest, "Invalid client id");
+            }
+
+            bool hasCars = this.clientsRepository.CheckForCars(id);
+
+            return Request.CreateResponse(HttpStatusCode.OK, hasCars);
+        }
+
+        //api/clients/delete
+        [HttpPost]
+        [ActionName("delete")]
+        public HttpResponseMessage DeletePerformer([FromBody]ClientModel value)
+        {
+
+            var client = clientsRepository.Get(value.ClientId);
+            if (client == null)
+            {
+                return Request.CreateResponse(HttpStatusCode.BadRequest, "Invalid client id");
+            }
+
+            this.clientsRepository.Delete(value.ClientId);
+
+            return Request.CreateResponse(HttpStatusCode.OK);
+        }
+
+        //api/clients/checkName?name=Jitan
+        [HttpGet]
+        [ActionName("checkName")]
+        public HttpResponseMessage CheckUername([FromUri]string name)
+        {
+            ClientModel existingClient = new ClientModel();
+            var client = clientsRepository.GetByName(name);
+            if (client != null)
+            {
+                existingClient.ClientId = client.ClientId;
+            }
+
+            return Request.CreateResponse(HttpStatusCode.OK, existingClient);
+        }
+
+        // api/clients/addPerformers
+        [HttpPost]
+        [ActionName("addPerformers")]
+        public HttpResponseMessage AddClients([FromBody]ClientPerformersModel model)
+        {
+            //Performer performer = performersRepository.Get(performerId);
+            var performers = new List<Performer>();
+            foreach (var id in model.PerformersIds)
+            {
+                Performer performer = performersRepository.Get(id);
+                performers.Add(performer);
+            }
+
+            if (!this.clientsRepository.EditPerformers(performers, model.ClientId))
+            {
+                return Request.CreateResponse(HttpStatusCode.BadRequest, "Invalid clientID");
+            }
+            return Request.CreateResponse(HttpStatusCode.OK, "Performers Added to client");
+
         }
 	}
 }

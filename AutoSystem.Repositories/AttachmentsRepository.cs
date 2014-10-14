@@ -14,7 +14,7 @@ namespace AutoSystem.Repositories
         public AttachmentsRepository(AutoSystemContext context)
             : base(context)
         {
-            this.dbContext = context;
+            this.dbContext = context;   
             this.repairsRepository = new RepairsRepository(context);
         }
 

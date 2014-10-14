@@ -164,12 +164,13 @@
     <Compile Include="Models\AttachmentModel.cs" />
     <Compile Include="Models\CarModel.cs" />
     <Compile Include="Models\ClientModel.cs" />
+    <Compile Include="Models\ClientPerformersModel.cs" />
     <Compile Include="Models\EditPerformerModel.cs" />
     <Compile Include="Models\FilterQuery.cs" />
     <Compile Include="Models\NoteModel.cs" />
     <Compile Include="Models\PartsModel.cs" />
     <Compile Include="Models\PerformerModel.cs" />
-    <Compile Include="Models\PerformerClientModel.cs" />
+    <Compile Include="Models\PerformerClientsModel.cs" />
     <Compile Include="Models\RepairModel.cs" />
     <Compile Include="Models\SimpleRepairModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

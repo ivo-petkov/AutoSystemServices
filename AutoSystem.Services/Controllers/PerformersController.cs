@@ -59,43 +59,44 @@ namespace AutoSystem.Services.Controllers
 
         [HttpPost]
         [ActionName("edit")]
-        public HttpResponseMessage EditPerformer([FromBody]EditPerformerModel value,
-            [ValueProvider(typeof(HeaderValueProviderFactory<String>))] String sessionKey)
+        public HttpResponseMessage EditPerformer([FromBody]PerformerModel value)
         {
-            var performer = performersRepository.GetBySessionKey(sessionKey);
+            if (string.IsNullOrEmpty(value.Username) || string.IsNullOrWhiteSpace(value.Username)
+               || value.Username.Length < 5 || value.Username.Length > 30)
+            {
+                return Request.CreateResponse(HttpStatusCode.BadRequest,
+                                              "Invalid username. Should be between 5 and 30 characters");
+            }
+
+            var performer = performersRepository.Get(value.PerformerId);
             if (performer == null)
             {
-                return Request.CreateResponse(HttpStatusCode.BadRequest, "Invalid session key");
+                return Request.CreateResponse(HttpStatusCode.BadRequest, "Invalid performer id");
             }
 
             var performerToEdit = new Performer()
                                  {
                                      PerformerId = performer.PerformerId,
-                                     Username = performer.Username,
+                                     Username = value.Username,
+                                     AuthCode = (value.AuthCode.ToLower() == "da39a3ee5e6b4b0d3255bfef95601890afd80709") ? performer.AuthCode : value.AuthCode,
                                      Name = value.Name,
                                      Address = value.Address,
                                      Telephone = value.Telephone,
-                                     AuthCode = value.OldAuthCode
+                                     Mol = value.Mol,
+                                     Bulstat = value.Bulstat,
+                                     Email = value.Email
+                                     
                                  };
 
-            if (performersRepository.EditPerformer(performerToEdit, value.NewAuthCode))
-            {
-                var updatedPerformer = performersRepository.Get(performerToEdit.PerformerId);
-                var performerModel = new PerformerModel()
-                {
-                    PerformerId = updatedPerformer.PerformerId,
-                    Username = updatedPerformer.Username,
-                    SessionKey = sessionKey,
-                    Name = updatedPerformer.Name,
-                    Address = updatedPerformer.Address,
-                    Telephone = updatedPerformer.Telephone
-                };
-
-                return Request.CreateResponse(HttpStatusCode.OK, performerModel);
+            if (performersRepository.EditPerformer(performerToEdit))
+            {   
+                return Request.CreateResponse(HttpStatusCode.OK);
             }
 
             return Request.CreateResponse(HttpStatusCode.BadRequest, "Could not edit user");
         }
+
+
 
         // api/performers/register
         [HttpPost]
@@ -112,20 +113,20 @@ namespace AutoSystem.Services.Controllers
             if(performersRepository.GetByUsername(value.Username) != null)
             {
                 return Request.CreateResponse(HttpStatusCode.BadRequest,
-                                              "Username already exists");
+                                              "Вече съществува подизпълнител със същото потребителско име");
             }
 
             performersRepository.Add(value);
-            var sessionKey = GenerateSessionKey(value.PerformerId);
-            performersRepository.SetSessionKey(value, sessionKey);
             var performerModel = new PerformerModel()
                                 {
                                     PerformerId = value.PerformerId,
                                     Username = value.Username,
-                                    SessionKey = sessionKey,
                                     Name = value.Name,
                                     Address = value.Address,
-                                    Telephone = value.Telephone
+                                    Telephone = value.Telephone,
+                                    Mol = value.Mol,
+                                    Bulstat = value.Bulstat,
+                                    Email = value.Email
                                 };
 
             return Request.CreateResponse(HttpStatusCode.Created, performerModel);
@@ -202,20 +203,76 @@ namespace AutoSystem.Services.Controllers
             return Request.CreateResponse(HttpStatusCode.BadRequest, "Invalid session key");
         }
 
-        // api/performers/addclient
+        // api/performers/addclients
         [HttpPost]
-        [ActionName("addclient")]
-        public HttpResponseMessage AddClient([FromBody]PerformerClientModel model)
+        [ActionName("addclients")]
+        public HttpResponseMessage AddClients([FromBody]PerformerClientsModel model)
         {
             //Performer performer = performersRepository.Get(performerId);
-            Client client = clientsRepository.Get(model.ClientId);
-            if (this.performersRepository.AddClient(client, model.PerformerId))
+            var clients = new List<Client>();
+            foreach (var id in model.ClientIds)
             {
-                return Request.CreateResponse(HttpStatusCode.OK, "Client Added to performer");
+                Client client = clientsRepository.Get(id);
+                clients.Add(client);
             }
 
-            return Request.CreateResponse(HttpStatusCode.BadRequest, "Invalid performerId");
+            if (!this.performersRepository.EditClients(clients, model.PerformerUsername))
+            {
+                return Request.CreateResponse(HttpStatusCode.BadRequest, "Invalid performerId");
+            }
+            return Request.CreateResponse(HttpStatusCode.OK, "Clients Added to performer");           
                         
+        }
+
+        //api/performers/delete
+        [HttpPost]
+        [ActionName("delete")]
+        public HttpResponseMessage DeletePerformer([FromBody]PerformerModel value)
+        {
+
+            var performer = performersRepository.Get(value.PerformerId);
+            if (performer == null)
+            {
+                return Request.CreateResponse(HttpStatusCode.BadRequest, "Invalid performer id");
+            }
+
+            this.performersRepository.Delete(value.PerformerId);
+            
+            return Request.CreateResponse(HttpStatusCode.OK);
+        }
+
+        //api/performers/checkRepairs?id=23
+        [HttpGet]
+        [ActionName("checkRepairs")]
+        public HttpResponseMessage CheckForRepairs([FromUri]int id)
+        {
+
+            var performer = performersRepository.Get(id);
+            if (performer == null)
+            {
+                return Request.CreateResponse(HttpStatusCode.BadRequest, "Invalid performer id");
+            }
+
+            bool hasRepairs = this.performersRepository.CheckForRepairs(id);
+
+            return Request.CreateResponse(HttpStatusCode.OK, hasRepairs);
+        }
+
+
+        //api/performers/checkUsername?username=Jitan
+        [HttpGet]
+        [ActionName("checkUsername")]
+        public HttpResponseMessage CheckUsername([FromUri]string username)
+        {
+            PerformerModel existingPerformer = new PerformerModel();
+            var performer = performersRepository.GetByUsername(username);
+            if (performer != null)
+            {
+                existingPerformer.PerformerId = performer.PerformerId;
+               
+            }
+
+            return Request.CreateResponse(HttpStatusCode.OK, existingPerformer);
         }
 
         private string GenerateSessionKey(int performerId)

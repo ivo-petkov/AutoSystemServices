@@ -184,6 +184,65 @@ namespace AutoSystem.Services.Controllers
         }
 
 
+        //api/repairs/adminfilter?RegisterPlate=ВР8000АХ&Brand=Ford
+        [HttpGet]
+        [ActionName("adminfilter")]
+        public IHttpActionResult GetByAdminFilter(
+            [ValueProvider(typeof(HeaderValueProviderFactory<String>))] String sessionKey,
+            [FromUri]FilterQuery filter)
+        {
+            Performer performer = performersRepository.GetBySessionKey(sessionKey);
+            if (performer == null)
+            {
+                return BadRequest("Invalid session key");
+            }
+
+
+            DateTime? formatedStartDate = new DateTime?();
+            DateTime? formatedEndDate = new DateTime?();
+
+            if (filter.StartDate != null)
+            {
+                formatedStartDate = DateTime.ParseExact(filter.StartDate, "dd-MM-yyyy", System.Globalization.CultureInfo.InvariantCulture);
+            }
+            if (filter.EndDate != null)
+            {
+                formatedEndDate = DateTime.ParseExact(filter.EndDate, "dd-MM-yyyy", System.Globalization.CultureInfo.InvariantCulture);
+            }
+
+
+            //IEnumerable<Repair> performerRepairs = performer.Repairs;
+
+            var filteredRepairs = this.repairsRepository.All().Where(r => r.RepairId != null
+                && (filter.RegisterPlate != null ? r.Car.RegisterPlate.ToLower().Contains(filter.RegisterPlate.ToLower()) : true)
+                && (filter.Brand != null ? r.Car.Brand == filter.Brand : true)
+                && (filter.ClientId != null ? r.Car.ClientId == filter.ClientId : true)
+                && (filter.PerformerId != null ? r.PerformerId == filter.PerformerId : true)
+                && (filter.Status != null ? (int)(r.Status) == filter.Status : true)
+                && (filter.AdminStatus != null ? (int)(r.AdminStatus) == filter.AdminStatus : true)
+                && (filter.Model != null ? r.Car.Model == filter.Model : true)
+                && (formatedStartDate != null ? DateTime.Compare(formatedStartDate.Value, r.Date) <= 0 : true)
+                && (formatedEndDate != null ? DateTime.Compare(formatedEndDate.Value, r.Date) >= 0 : true)
+                );
+
+
+            IEnumerable<SimpleRepairModel> resposeRepairs = filteredRepairs.Select(r => new SimpleRepairModel
+            {
+                RepairId = r.RepairId,
+                ClientName = r.Car.Client.Name,
+                Status = r.Status,
+                Date = r.Date.ToString("dd/MM/yy"),
+                PerformerName = r.Performer.Name,
+                CarBrand = r.Car.Brand,
+                CarModel = r.Car.Model,
+                RegisterPlate = r.Car.RegisterPlate
+            });
+            var orederedRepairs = resposeRepairs.OrderByDescending(r => r.RepairId).ToList();
+
+            return Ok(orederedRepairs);
+        }
+
+
 
         // api/repairs/all
         [HttpGet]

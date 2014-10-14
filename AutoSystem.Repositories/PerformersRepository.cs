@@ -1,6 +1,7 @@
 ﻿using AutoSystem.DataLayer;
 using AutoSystem.Models;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 
 
@@ -46,36 +47,64 @@ namespace AutoSystem.Repositories
             dbContext.SaveChanges();
         }
 
-        public bool EditPerformer(Performer value, string newAuthCode)
+        public bool EditPerformer(Performer value)
         {
             var performer = dbContext.Performers.Find(value.PerformerId);
-            if (value.AuthCode != null)
+            if (value == null)
             {
-                if (performer.Username != value.Username || performer.AuthCode != value.AuthCode)
-                {
-                    return false;
-                }
+                return false;
             }
 
-            performer.Name = (value.Name != null) ? value.Name : performer.Name;
-            performer.AuthCode = (value.AuthCode != null) ? newAuthCode : performer.AuthCode;
-            performer.Address = (value.Address != null) ? value.Address : performer.Address;
-            performer.Telephone = (value.Telephone != null) ? value.Telephone : performer.Telephone;
+            performer.Name = value.Name;
+            performer.Username = value.Username;
+            performer.AuthCode = value.AuthCode;
+            performer.Address = value.Address;
+            performer.Telephone = value.Telephone;
+            performer.Mol = value.Mol;
+            performer.Bulstat = value.Bulstat;
+            performer.Email = value.Email;
 
             dbContext.SaveChanges();
             return true;
         }
 
-        public bool AddClient(Client client, int performerId)
+        public bool EditClients(ICollection<Client> editedClients, string performerUsername)
         {
-            var performer = dbContext.Performers.Find(performerId);
+            var performer =   this.GetByUsername(performerUsername);
             if (performer == null)
             {
                 return false;
             }
-            performer.Clients.Add(client);
 
+            int count = performer.Clients.Count;
+            var performerClients = performer.Clients.ToList();
+            for (int i = 0; i < count; i++)
+            {
+                if (!editedClients.Contains(performerClients[i]))
+                {
+                    performer.Clients.Remove(performerClients[i]);
+                }
+            }
+
+            foreach (var client in editedClients)
+            {
+                if (!performer.Clients.Contains(client))
+                {
+                    performer.Clients.Add(client);  
+                }
+            }  
             dbContext.SaveChanges();
+            return true;        
+        }
+
+        public bool CheckForRepairs(int performerId)
+        {
+            var performer = this.Get(performerId);
+
+            if (performer.Repairs == null || performer.Repairs.Count == 0)
+            {
+                return false;
+            }
             return true;
         }
     }      
